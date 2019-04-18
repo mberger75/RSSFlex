@@ -86,7 +86,6 @@
     height: 450px;
     overflow-y: scroll;
     overflow-x: hidden;
-    border: 1px solid gray;
     background-color: #fff;
 }
 
@@ -95,7 +94,7 @@
     background-color: rgb(158, 157, 157);
     width: 400px;
     padding: 10px;
-    margin: -1px;
+    margin: 0px;
 }
 .header-panel > .icon {
     float: left;
