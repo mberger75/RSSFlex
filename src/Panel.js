@@ -38,7 +38,9 @@ class Panel extends Component {
                 <header className="header-panel">
                     <img className="icon" src={favicon} alt=""/>
                     <h1>{title}</h1>
-                    <button className="btnFlux deleteFlux" title="Delete this flux">❌</button>
+                    <span className="btnFlux deleteFlux" title="Delete this flux" role="img" aria-label="Delete flux">
+                        ❌
+                    </span>
                 </header>
                 <Articles 
                     items={items} 
