@@ -25,7 +25,7 @@ class App extends Component {
     }
 
     componentWillMount() {
-        let promises = FLUX.map(url => fetch(API.url + url + API.key));
+        let promises = FLUX.map(url => fetch(API.url + encodeURIComponent(url) + API.key));
 
         Promise.all(promises)
         .then(results => Promise.all(results.map(res => res.json())))
