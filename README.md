@@ -3,7 +3,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## RSSFlex
 
 A simple dashboard
-
-=> <a href="https://rssflex.netlify.com" target="_blank">https://rssflex.netlify.com</a>
+    => [https://rssflex.netlify.com](https://rssflex.netlify.com){:target="_blank"}
 
 *This project also serves as a test for continuous deployment on Netlify*
