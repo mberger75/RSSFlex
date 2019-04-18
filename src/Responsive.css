@@ -1,0 +1,26 @@
+@media screen and (max-width: 900px) {
+    .panel {
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .button-tab {
+        margin-bottom: 20px;
+    }
+    .button-tab > .btn {
+        display: block;
+        width: 80%;
+        margin: 0 auto;
+        margin-bottom: 5px;
+    }
+
+    .header-app {
+        text-align: center;
+    }
+    .current-time, .prez, .addFlux-container {
+        position: relative;
+        float: none;
+    }
+}

@@ -4,6 +4,7 @@ import FLUX, {API} from './Flux';
 import Tab, {tabList} from './Tab';
 import {getCurTime} from './utils';
 import './App.css';
+import './Responsive.css';
 import './PanelScrollbar.css';
 
 class App extends Component {

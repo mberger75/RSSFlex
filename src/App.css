@@ -88,14 +88,6 @@
     background-color: #fff;
     box-shadow: inset 0px -30px 30px -20px rgb(201, 201, 201);
 }
-
-@media screen and (max-width: 900px) {
-    .panel {
-        margin: 0 auto;
-        margin-bottom: 20px;
-    }
-}
-
 .panel > .header-panel {
     position: absolute;
     background-color: rgb(158, 157, 157);
