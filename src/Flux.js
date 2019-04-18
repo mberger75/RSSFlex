@@ -1,17 +1,17 @@
 const FLUX = [
-    'www.codeur.com%2Fblog%2Ffeed%2F',
-    'feeds.feedburner.com%2FGrafikart',
-    'www.alsacreations.com%2Frss%2Factualites.xml',
-    'medium.freecodecamp.org%2Ffeed',
-    'news.humancoders.com%2Fitems%2Ffeed.rss',
-    'korben.info%2Fcategory%2Finfos%2Fdeveloppement%2F%3Ffeed%3Drss',
-    'www.lafermeduweb.net%2Fsearch-rss.xml%3Fsearch_veille%255Bsorting%255D%3DpublishedAt-desc%26search_veille%255BnbPerPages%255D%3D10%26search_veille%255BdateInterval%255D%3D%26search_veille%255Bauthor%255D%3D%26search_veille%255Blang%255D%3Dall%26search_veille%255Bsearch%255D%3Djavascript',
-    'stackoverflow.com%2Ffeeds%2Ftag%3Ftagnames%3Djavascript%26sort%3Dnewest',
-    'hn.algolia.com%2Flatest.atom',
+    'https://www.codeur.com/blog/feed/',
+    'https://feeds.feedburner.com/Grafikart',
+    'https://www.alsacreations.com/rss/actualites.xml',
+    'https://medium.freecodecamp.org/feed',
+    'https://news.humancoders.com/items/feed.rss',
+    'https://korben.info/category/infos/developpement/?feed=rss',
+    'https://www.lafermeduweb.net/search-rss.xml?search_veille%5Bsorting%5D=publishedAt-desc&search_veille%5BnbPerPages%5D=10&search_veille%5BdateInterval%5D=&search_veille%5Bauthor%5D=&search_veille%5Blang%5D=all&search_veille%5Bsearch%5D=javascript',
+    'https://stackoverflow.com/feeds/tag?tagnames=javascript&sort=newest',
+    'https://hn.algolia.com/latest.atom',
 ];
 
 export const API = {
-    url: 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2F',
+    url: 'https://api.rss2json.com/v1/api.json?rss_url=',
     key: '&api_key=jlnbzevd1d5rwe7egbxrjfwxkpgdh8lpfyusedik'
 }
 
