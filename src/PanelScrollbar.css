@@ -1,4 +1,4 @@
-::-webkit-scrollbar {
+.panel::-webkit-scrollbar {
     width: 9px;
 }
   ::-webkit-scrollbar-button {
