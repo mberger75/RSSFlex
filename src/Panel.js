@@ -55,9 +55,10 @@ class Panel extends Component {
 
 const Articles = ({items, getDate, getContent}) => (
     <div className="articles">
-        {items.map(({link, content, title, pubDate, description}) => (
+        {items.map(({link, content, title, pubDate, description, thumbnail}) => (
             <div key={link} className="content">
                 <a className="article" href={link} target="_blank" rel="noopener noreferrer">
+                    {  thumbnail !== '' ? <img src={thumbnail} className="thumbnail" alt="thumbnail"></img> : ''}
                     <p className="title">{title}</p>
                     <p className="date">{getDate(pubDate)}</p>
                     <p className="description">
