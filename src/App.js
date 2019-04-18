@@ -13,7 +13,7 @@ class App extends Component {
             datas: [],
             isLoaded: false,
             time: getCurTime(),
-            tabState: tabList.map(el => el.state),
+            tabState: tabList.map(el => el.state ? el.state : el.state = 'inactive'),
         };
     }
 
@@ -29,7 +29,7 @@ class App extends Component {
     }
 
     componentWillMount() {
-        let promises = FLUX.map(url => {
+        let promises = FLUX.frontend.map(url => {
             return fetch(API.url + encodeURIComponent(url) + API.key)
         });
 
