@@ -24,6 +24,31 @@
 .current-time {
     text-align: center;
 }
+.addFlux-container {
+    position: absolute;
+    float: right;
+    right: 0px;
+    top: 0px;
+}
+
+* button {
+    border: none;
+    outline: none;
+}
+
+.addFlux {
+    width: 62px;
+    height: 62px;
+    font-size: 30px;
+    background-color: rgb(231, 86, 231);
+    color: #fff;
+    transition: 0.2s;
+}
+.addFlux:hover {
+    cursor: pointer;
+    background-color: rgb(236, 103, 236);
+    transition: 0.2s;
+}
 
 .button-tab {
     background-color: transparent;
@@ -34,8 +59,6 @@
     padding: 10px;
     margin-right: 5px;
     background-color: #fff;
-    outline: none;
-    border: none;
 }
 .button-tab > button:hover {
     cursor: pointer;
@@ -71,20 +94,30 @@
     background-color: rgb(158, 157, 157);
     width: 400px;
     padding: 10px;
-    margin: 0;
+    margin: -1px;
 }
-
 .header-panel > .icon {
     float: left;
     margin-right: 10px;
     width: 17px;
     height: 17px;
 }
-
 .header-panel > h1 {
     color: #fff;
     font-size: 13px;
     margin: 0;
+}
+.header-panel > .deleteFlux {
+    position: absolute;
+    float: right;
+    right: 5px;
+    top: 5px;
+    background: transparent;
+    font-size: 15px;
+}
+.header-panel > .deleteFlux:hover {
+    text-shadow: 0px 0px 6px rgba(206, 9, 9, 0.3);
+    cursor: pointer;
 }
 
 .articles {

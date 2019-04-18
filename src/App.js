@@ -3,6 +3,7 @@ import Panel from './Panel';
 import FLUX, {API} from './Flux';
 import {getCurTime} from './utils';
 import './App.css';
+import './PanelScrollbar.css';
 
 class App extends Component {
     constructor() {
@@ -49,6 +50,9 @@ class App extends Component {
                     <p className="slogan">Simple dashboard</p>
                 </div>
                 <p className="current-time">{time}</p>
+                <div className="addFlux-container">
+                    <button className="btnFlux addFlux" title="Add a new flux">+</button>
+                </div>
             </header>
                 <header className="button-tab">
                     <button className='btn'>DEV FRONTEND</button>
@@ -57,7 +61,7 @@ class App extends Component {
                     <button className='btn'>HIGH-TECH</button>
                     <button className='btn'>MOBILE</button>
                 </header>
-                <div className="panel-container">
+                <div className="panel-container frontend">
                 {datas.map((el, id) => (
                     <Panel 
                         key={id}
