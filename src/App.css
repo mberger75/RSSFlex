@@ -79,10 +79,13 @@
     background-color: #C9C9C9;
 }
 
+.panel, .header-panel {
+    width: 400px;
+}
+
 .panel {
     margin: 0 1% 20px;
     margin-bottom: 20px;
-    width: 400px;
     height: 450px;
     overflow-y: overlay;
     background-color: #fff;
@@ -91,7 +94,6 @@
 .panel > .header-panel {
     position: absolute;
     background-color: rgb(158, 157, 157);
-    width: 400px;
     padding: 10px;
     margin: 0px;
 }

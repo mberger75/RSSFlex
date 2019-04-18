@@ -24,3 +24,22 @@
         float: none;
     }
 }
+
+@media screen and (max-width: 500px) {
+    .panel-container {
+        display: block;
+    }
+    .panel, .panel > .header-panel {
+        width: 350px;
+    }
+}
+@media screen and (max-width: 400px) {
+    .panel, .panel > .header-panel {
+        width: 300px;
+    }
+}
+@media screen and (max-width: 340px) {
+    .panel, .panel > .header-panel {
+        width: 250px;
+    }
+}
