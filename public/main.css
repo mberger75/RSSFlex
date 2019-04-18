@@ -5,10 +5,12 @@
 }
 
 body {
+  background-color: rgba(2, 173, 2, 0.7);
   margin: 0;
   padding: 0;
 }
 
 .loading {
+  color: #fff;
   text-align: center;
 }

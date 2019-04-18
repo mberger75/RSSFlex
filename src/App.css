@@ -3,18 +3,20 @@
 }
 
 .App > .header-app {
-    background-color: rgb(26, 26, 26);
+    background-color: #353536;
     color: #fff;
-    padding: 10px;
+    padding: 5px 10px 5px 10px;
     margin: 0px 0px 30px 0px;
 }
-
 .prez {
     position: absolute;
     float: left;
 }
 .prez > h1, .slogan {
     margin: 0px;
+}
+.prez > h1 {
+    font-size: 23px;
 }
 .slogan {
     font-style: italic;
@@ -25,12 +27,13 @@
 
 .button-tab {
     background-color: transparent;
+    margin-left: 10px;
 }
 
 .button-tab > button {
-    padding: 20px;
+    padding: 10px;
     margin-right: 5px;
-    background-color: #C9C9C9;
+    background-color: #fff;
     outline: none;
     border: none;
 }
