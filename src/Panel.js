@@ -9,7 +9,7 @@ class Panel extends Component {
     }
 
     checkIfXmlAndReturnExtract = (description) => {
-        let empty = '...'
+        let empty = '';
 
         if (description.trim().charAt(0) === '<') {
             let res = this.stripXml(description.substring(0, 140));
