@@ -52,10 +52,10 @@ class App extends Component {
             </header>
                 <header className="button-tab">
                     <button className='btn'>DEV FRONTEND</button>
-                    {/* <button className='btn'>DEV BACKEND</button>
+                    <button className='btn'>DEV BACKEND</button>
                     <button className='btn'>WEBDESIGN</button>
                     <button className='btn'>HIGH-TECH</button>
-                    <button className='btn'>MOBILE</button> */}
+                    <button className='btn'>MOBILE</button>
                 </header>
                 <div className="panel-container">
                 {datas.map((el, id) => (
