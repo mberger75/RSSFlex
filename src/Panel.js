@@ -31,13 +31,13 @@ class Panel extends Component {
     }
 
     render() {
-        const {favicon, title, items} = this.props;
+        const {favicon, title, items, link} = this.props;
 
         return (
             <div className={'panel'}>
                 <header className="header-panel">
                     <img className="icon" src={favicon} alt=""/>
-                    <h1>{title}</h1>
+                    <a className="panelTitle" href={link} title={'Lien vers ' + link} target="_blank" rel="noopener noreferrer">{title}</a>
                     <span className="btnFlux deleteFlux" title="Delete this flux" role="img" aria-label="Delete flux">
                         ❌
                     </span>
@@ -47,6 +47,7 @@ class Panel extends Component {
                     getDate={this.getFrFormatDate} 
                     getContent={this.checkIfXmlAndReturnExtract}
                 />
+                <div className="spacer"></div>
             </div>
         )
     }

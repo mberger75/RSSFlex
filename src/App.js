@@ -51,7 +51,9 @@ class App extends Component {
                 </div>
                 <p className="current-time">{time}</p>
                 <div className="addFlux-container">
-                    <button className="btnFlux addFlux" title="Add a new flux">+</button>
+                    <button className="btnFlux addFlux" title="Add a new flux">
+                        +
+                    </button>
                 </div>
             </header>
                 <header className="button-tab">
@@ -63,10 +65,11 @@ class App extends Component {
                 </header>
                 <div className="panel-container frontend">
                 {datas.map((el, id) => (
-                    <Panel 
+                    <Panel
                         key={id}
-                        favicon={this.getFavicon(el.feed)} 
-                        title={el.feed.title} 
+                        favicon={this.getFavicon(el.feed)}
+                        title={el.feed.title}
+                        link={el.feed.link}
                         items={el.items}
                     />
                 ))}
