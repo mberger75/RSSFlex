@@ -2,11 +2,17 @@
     text-align: left;
 }
 
+* button {
+    border: none;
+    outline: none;
+}
+
 .App > .header-app {
     background-color: #353536;
     color: #fff;
     padding: 5px 10px 5px 10px;
     margin: 0px 0px 30px 0px;
+    position: relative;
 }
 .prez {
     position: absolute;
@@ -29,16 +35,11 @@
     float: right;
     right: 0px;
     top: 0px;
+    height: 100%;
 }
-
-* button {
-    border: none;
-    outline: none;
-}
-
 .addFlux {
     width: 62px;
-    height: 62px;
+    height: 100%;
     font-size: 30px;
     background-color: rgb(231, 86, 231);
     color: #fff;
