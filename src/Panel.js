@@ -14,7 +14,12 @@ class Panel extends Component {
             return res.trim() !== '' ? res + '...' : `Aucun aperçu n'a été trouvé...`;
         }
         else {
-            return description.substring(0, 140) + '...';
+            if (description.length > 30) {
+                return description.substring(0, 140) + '...';
+            }
+            else {
+                return '...';
+            }
         }
     }
 
