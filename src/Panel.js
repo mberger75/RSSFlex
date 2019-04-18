@@ -12,16 +12,14 @@ class Panel extends Component {
         let empty = '';
 
         if (description.trim().charAt(0) === '<') {
-            let res = this.stripXml(description.substring(0, 140));
-            return res.trim() !== '' && res.trim().length > 30 ? res + '...' : empty;
+            return this.stripXml(description).trim() !== '' ?
+                this.stripXml(description).substring(0, 140) + '...' : 
+                empty;
         }
         else {
-            if (description.length > 30) {
-                return description.substring(0, 140) + '...';
-            }
-            else {
-                return empty;
-            }
+            return description.length > 10 ?
+                description.substring(0, 140) + '...' : 
+                empty;
         }
     }
 
@@ -59,7 +57,7 @@ const Articles = ({items, getDate, getContent}) => (
                     <p className="title">{title}</p>
                     <p className="date">{getDate(pubDate)}</p>
                     <p className="description">
-                        {content !== '' ? getContent(content) : getContent(description)}
+                        {content.length > 30 ? getContent(content) : getContent(description)}
                     </p>
                     <hr/>
                 </a>
