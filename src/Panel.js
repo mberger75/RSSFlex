@@ -13,7 +13,7 @@ class Panel extends Component {
 
         if (description.trim().charAt(0) === '<') {
             let res = this.stripXml(description.substring(0, 140));
-            return res.trim() !== '' && res.trim.length > 30 ? res + '...' : empty;
+            return res.trim() !== '' && res.trim().length > 30 ? res + '...' : empty;
         }
         else {
             if (description.length > 30) {
