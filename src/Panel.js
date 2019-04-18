@@ -9,16 +9,18 @@ class Panel extends Component {
     }
 
     checkIfXmlAndReturnExtract = (description) => {
+        let empty = '...'
+
         if (description.trim().charAt(0) === '<') {
             let res = this.stripXml(description.substring(0, 140));
-            return res.trim() !== '' ? res + '...' : `Aucun aperçu n'a été trouvé...`;
+            return res.trim() !== '' && res.trim.length > 30 ? res + '...' : empty;
         }
         else {
             if (description.length > 30) {
                 return description.substring(0, 140) + '...';
             }
             else {
-                return '...';
+                return empty;
             }
         }
     }
