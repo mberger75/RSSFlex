@@ -55,18 +55,18 @@
     background-color: transparent;
     margin-left: 10px;
 }
-
-.button-tab > button {
-    padding: 10px;
+.button-tab > .btn {
+    padding: 7px;
     margin-right: 5px;
     background-color: #fff;
 }
-.button-tab > button:hover {
+.button-tab > .btn:hover {
     cursor: pointer;
 }
-
 .button-tab .active {
+    padding: 7px 11px 7px 11px;
     font-weight: bold;
+    background-color: #C9C9C9;
 }
 
 .panel-container {

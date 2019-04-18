@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Panel from './Panel';
 import FLUX, {API} from './Flux';
+import Tab, {tabList} from './Tab';
 import {getCurTime} from './utils';
 import './App.css';
 import './PanelScrollbar.css';
@@ -12,12 +13,15 @@ class App extends Component {
             datas: [],
             isLoaded: false,
             time: getCurTime(),
+            tabState: tabList.map(el => el.state),
         };
     }
 
     getFavicon(feed) {
+        let shortUrl = feed.link.split('/')[2];
+
         if(feed.image.trim() === '') {
-            return `https://api.faviconkit.com/${feed.link.split('/')[2]}/144`;;
+            return `https://api.faviconkit.com/${shortUrl}/144`;;
         }
         else {
             return feed.image;
@@ -25,7 +29,9 @@ class App extends Component {
     }
 
     componentWillMount() {
-        let promises = FLUX.map(url => fetch(API.url + encodeURIComponent(url) + API.key));
+        let promises = FLUX.map(url => {
+            return fetch(API.url + encodeURIComponent(url) + API.key)
+        });
 
         Promise.all(promises)
         .then(results => Promise.all(results.map(res => res.json())))
@@ -37,8 +43,22 @@ class App extends Component {
         setInterval(() => this.setState({time : getCurTime()}), 1000);
     }
 
+    toggleTabOnClick = (id) => {        
+        let sliced = this.state.tabState.slice();
+
+        for (let i = 0; i < sliced.length; i++) {
+            i === id ? sliced[i] = 'active' : sliced[i] = 'inactive'
+        }
+        return this.setState({tabState: sliced});
+    }
+
+    switchPanelOnClick(title) {
+        console.log(title)
+        return true;
+    }
+
     render() {
-        const {isLoaded, datas, time} = this.state;
+        const {isLoaded, datas, time, tabState} = this.state;
 
         if (!isLoaded) return <h1 className="loading">Loading...</h1>
 
@@ -57,22 +77,28 @@ class App extends Component {
                 </div>
             </header>
                 <header className="button-tab">
-                    <button className='btn'>DEV FRONTEND</button>
-                    <button className='btn'>DEV BACKEND</button>
-                    <button className='btn'>WEBDESIGN</button>
-                    <button className='btn'>HIGH-TECH</button>
-                    <button className='btn'>MOBILE</button>
-                </header>
-                <div className="panel-container frontend">
-                {datas.map((el, id) => (
-                    <Panel
+                {tabList.map((tab, id) => (
+                    <Tab 
                         key={id}
-                        favicon={this.getFavicon(el.feed)}
-                        title={el.feed.title}
-                        link={el.feed.link}
-                        items={el.items}
+                        id={id}
+                        state={tabState[id]}
+                        emoji={tab.emoji}
+                        title={tab.title}
+                        toggle={this.toggleTabOnClick}
+                        switchPan={this.switchPanelOnClick}
                     />
                 ))}
+                </header>
+                <div className={"panel-container " + tabList[0].title}>
+                    {datas.map((el, id) => (
+                        <Panel
+                            key={id}
+                            favicon={this.getFavicon(el.feed)}
+                            title={el.feed.title}
+                            link={el.feed.link}
+                            items={el.items}
+                        />
+                    ))}
                 </div>
             </div>
         )
