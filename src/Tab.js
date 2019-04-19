@@ -9,10 +9,11 @@ export const tabList = [
     {emoji: '📹', title: 'VIDEOS'}
 ]
 
-const Tab = ({state, id, emoji, title, toggle, switchPan}) => (
-    <button className={'btn ' + state} onClick={function() {toggle(id); switchPan(title)}}>
+const Tab = ({state, id, emoji, title, dataLen, toggle}) => (
+    <button className={'btn ' + state} onClick={() => toggle(id, title)}>
         <span role='img' aria-label='emoji'>{emoji}</span> 
         &nbsp;{title}
+        {state === 'active' ? <div className="dataLength">&nbsp;{dataLen}</div> : null}
     </button>
 )
 

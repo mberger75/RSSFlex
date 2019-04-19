@@ -38,9 +38,7 @@ class Panel extends Component {
                 <header className="header-panel">
                     <img className="icon" src={favicon} alt=""/>
                     <a className="panelTitle" href={link} title={'Lien vers ' + link} target="_blank" rel="noopener noreferrer">{title}</a>
-                    <span className="btnFlux deleteFlux" title="Delete this flux" role="img" aria-label="Delete flux">
-                        ❌
-                    </span>
+                    <div className="dataLength">{items.length}</div>
                 </header>
                 <Articles 
                     items={items} 
@@ -58,7 +56,7 @@ const Articles = ({items, getDate, getContent}) => (
         {items.map(({link, content, title, pubDate, description, thumbnail}) => (
             <div key={link} className="content">
                 <a className="article" href={link} target="_blank" rel="noopener noreferrer">
-                    {  thumbnail !== '' ? <img src={thumbnail} className="thumbnail" alt="thumbnail"></img> : ''}
+                    {thumbnail ? <img src={thumbnail} className="thumbnail" alt="thumbnail"></img> : ''}
                     <p className="title">{title}</p>
                     <p className="date">{getDate(pubDate)}</p>
                     <p className="description">

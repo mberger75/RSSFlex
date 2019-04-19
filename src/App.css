@@ -31,33 +31,13 @@
 .current-time {
     text-align: center;
 }
-.addFlux-container {
-    position: absolute;
-    float: right;
-    right: 0px;
-    top: 0px;
-    height: 100%;
-}
-.addFlux {
-    width: 62px;
-    height: 100%;
-    font-size: 30px;
-    background-color: rgb(231, 86, 231);
-    color: #fff;
-    transition: 0.2s;
-}
-.addFlux:hover {
-    cursor: pointer;
-    background-color: rgb(236, 103, 236);
-    transition: 0.2s;
-}
 
 .button-tab {
     background-color: transparent;
     margin-left: 10px;
 }
 .button-tab > .btn {
-    padding: 7px;
+    padding: 7px 7px 10px 7px;
     margin-right: 5px;
     background-color: #fff;
 }
@@ -115,18 +95,6 @@
 .header-panel > .panelTitle:hover {
     text-shadow: 0px 0px 3px rgb(231, 86, 231);
 }
-.header-panel > .deleteFlux {
-    position: absolute;
-    float: right;
-    right: 9px;
-    top: 9px;
-    background: transparent;
-    font-size: 15px;
-}
-.header-panel > .deleteFlux:hover {
-    text-shadow: 0px 0px 6px rgba(206, 9, 9, 0.3);
-    cursor: pointer;
-}
 
 .articles {
     margin-top: 30px;
@@ -169,6 +137,25 @@
 }
 .spacer {
     height: 55px;
+}
+.dataLength {
+    text-align: center;
+    display: inline-block;
+    background-color: rgba(46, 46, 46, 0.3);
+    color: #fff;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 3px;
+}
+.btn > .dataLength {
+    margin-left: 5px;
+    padding: 3px 5px 3px 3px;
+}
+.header-panel > .dataLength {
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
+    padding: 5px;
 }
 
 .footer {
