@@ -170,3 +170,31 @@
 .spacer {
     height: 55px;
 }
+
+.footer {
+    position: fixed;
+    width: 200px;
+    padding: 5px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    bottom: 0;
+    right: 0;
+    transition: 0.2s;
+}
+.footer:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.8);
+    transition: 0.3s;
+}
+.footer > a {
+    text-decoration: none;
+    color: #fff;
+}
+.footer > a > img {
+    float: right;
+    margin-right: 15px;
+    margin-left: -5px;
+    width: 20px;
+    height: 20px;
+}

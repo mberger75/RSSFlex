@@ -14,7 +14,8 @@ class App extends Component {
             datas: [],
             isLoaded: false,
             time: getCurTime(),
-            tabState: tabList.map(el => el.state ? el.state : el.state = 'inactive'),
+            currentTab: 'FRONTEND',
+            tabState: tabList.map(el => el ? el.state : el.state = 'inactive'),
         };
     }
 
@@ -53,30 +54,29 @@ class App extends Component {
         return this.setState({tabState: sliced});
     }
 
-    switchPanelOnClick(title) {
-        console.log(title)
-        return true;
+    switchPanelOnClick = (title) => {
+        return this.setState({currentTab: title})
     }
 
     render() {
-        const {isLoaded, datas, time, tabState} = this.state;
+        const {isLoaded, datas, time, currentTab, tabState} = this.state;
 
         if (!isLoaded) return <h1 className="loading">Loading...</h1>
 
         return (
             <div className="App">
-            <header className="header-app">
-                <div className="prez">
-                    <h1>RSSFlex</h1>
-                    <p className="slogan">Simple dashboard</p>
-                </div>
-                <p className="current-time">{time}</p>
-                <div className="addFlux-container">
-                    <button className="btnFlux addFlux" title="Add a new flux">
-                        +
-                    </button>
-                </div>
-            </header>
+                <header className="header-app">
+                    <div className="prez">
+                        <h1>RSSFlex</h1>
+                        <p className="slogan">Simple dashboard</p>
+                    </div>
+                    <p className="current-time">{time}</p>
+                    <div className="addFlux-container">
+                        <button className="btnFlux addFlux" title="Add a new flux">
+                            +
+                        </button>
+                    </div>
+                </header>
                 <header className="button-tab">
                 {tabList.map((tab, id) => (
                     <Tab 
@@ -90,17 +90,25 @@ class App extends Component {
                     />
                 ))}
                 </header>
-                <div className={"panel-container " + tabList[0].title}>
-                    {datas.map((el, id) => (
-                        <Panel
-                            key={id}
-                            favicon={this.getFavicon(el.feed)}
-                            title={el.feed.title}
-                            link={el.feed.link}
-                            items={el.items}
-                        />
-                    ))}
-                </div>
+                {currentTab === 'FRONTEND' ?
+                    <div className={"panel-container " + currentTab}>
+                        {datas.map((el, id) => (
+                            <Panel
+                                key={id}
+                                favicon={this.getFavicon(el.feed)}
+                                title={el.feed.title}
+                                link={el.feed.link}
+                                items={el.items}
+                            />
+                        ))}
+                    </div> : null
+                }
+                <footer className="footer">
+                    <a href="https://github.com/mberger75" target="_blank" rel="noopener noreferrer">
+                        Développé par MB
+                        <img src="https://bit.ly/2IuMMdr" alt="Github"></img>
+                    </a>
+                </footer>
             </div>
         )
     }

@@ -1,11 +1,12 @@
 import React from 'react';
 
 export const tabList = [
-    {emoji: '🎨', title: 'FRONTEND', state: 'active'},
+    {emoji: '🎨', title: 'FRONT', state: 'active'},
     {emoji: '🌈', title: 'UI/UX'},
-    {emoji: '🎩', title: 'BACKEND'},
+    {emoji: '🎩', title: 'BACK'},
     {emoji: '📱', title: 'MOBILE'},
-    {emoji: '💾', title: 'HARDWARE'},
+    {emoji: '🔌', title: 'HARDWARE'},
+    {emoji: '📹', title: 'VIDEOS'}
 ]
 
 const Tab = ({state, id, emoji, title, toggle, switchPan}) => (
