@@ -11,7 +11,7 @@
     }
     .button-tab > .btn {
         display: block;
-        width: 80%;
+        width: 70%;
         margin: 0 auto;
         margin-bottom: 5px;
     }
@@ -28,6 +28,8 @@
 @media screen and (max-width: 500px) {
     .panel-container {
         display: block;
+        height: 100%;
+        padding-bottom: 30px;
     }
     .panel, .panel > .header-panel {
         width: 350px;
