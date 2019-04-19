@@ -31,16 +31,16 @@ class Panel extends Component {
     }
 
     render() {
-        const {favicon, title, items, link} = this.props;
+        const {favicon, title, items, link, id} = this.props;
 
         return (
-            <div className={'panel'}>
+            <div className={`panel ${id}`}>
                 <header className="header-panel">
                     <img className="icon" src={favicon} alt=""/>
                     <a className="panelTitle" href={link} title={'Lien vers ' + link} target="_blank" rel="noopener noreferrer">{title}</a>
                     <div className="dataLength">{items.length}</div>
                 </header>
-                <Articles 
+                <Articles
                     items={items} 
                     getDate={this.getFrFormatDate} 
                     getContent={this.checkIfXmlAndReturnExtract}

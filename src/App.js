@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Panel from './Panel';
 import FLUX, {API} from './Flux';
-import Tab, {tabList} from './Tab';
 import {getCurTime} from './utils';
 import './App.css';
 import './Responsive.css';
@@ -15,20 +14,24 @@ class App extends Component {
             isLoaded: false,
             time: getCurTime(),
             currentTab: 'FRONT',
-            promises: FLUX['FRONT'],
-            tabState: tabList.map(el => el ? el.state : el.state = 'inactive'),
+            tabState: Object.keys(FLUX).map(key => FLUX[key].state ? FLUX[key].state : FLUX[key].state = 'inactive'),
             dataLen: 0,
         };
     }
 
-    getFavicon(feed) {
-        let shortUrl = feed.link.split('/')[2];
-
-        if(feed.image.trim() === '') {
-            return `https://api.faviconkit.com/${shortUrl}/144`;;
+    getIcon(feed) {
+        if (feed) {
+            let shortUrl = feed.link.split('/')[2];
+    
+            if(feed.image.trim() === '') {
+                return `https://api.faviconkit.com/${shortUrl}/144`;
+            }
+            else {
+                return feed.image;
+            }
         }
         else {
-            return feed.image;
+            return `https://api.faviconkit.com/rss.com/144`;
         }
     }
 
@@ -39,19 +42,17 @@ class App extends Component {
     }
 
     fetchData() {
-        let promises = this.state.promises.map(url => {
+        let promises = FLUX[this.state.currentTab].url.map(url => {
             return fetch(API.url + encodeURIComponent(url) + API.key)
         });
 
         Promise.all(promises)
         .then(results => Promise.all(results.map(res => res.json())))
-        .then(datas => {
-            this.setState({
-                datas: datas,
-                dataLen: this.getItemArrLength(datas),
-                isLoaded: true,
-            });
-        })
+        .then(datas => this.setState({
+            datas: datas, 
+            isLoaded: true, 
+            dataLen: this.getItemArrLength(datas)
+        }))
         .catch(err => console.log(err));
     }
 
@@ -60,7 +61,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        this.fetchData();
+        this.fetchData(this.state.currentTab);
         this.updateTime();
     }
 
@@ -68,22 +69,16 @@ class App extends Component {
         let sliced = this.state.tabState.slice();
 
         for (let i = 0; i < sliced.length; i++) {
-            i === id ? sliced[i] = 'active' : sliced[i] = 'inactive';
+            i === id ? sliced[i] = 'active' : sliced[i] = '';
         }
 
         this.setState({
             tabState: sliced,
             currentTab: title,
-            promises: FLUX[title],
-        },
-        this.fetchData);
+        }, this.fetchData);
     }
 
     render() {
-        const {datas, currentTab, tabState} = this.state;
-
-        if (!this.state.isLoaded) return <h1 className="loading">Loading...</h1>
-
         return (
             <div className="App">
                 <header className="header-app">
@@ -94,29 +89,21 @@ class App extends Component {
                     <p className="current-time">{this.state.time}</p>
                 </header>
                 <header className="button-tab">
-                {tabList.map((tab, id) => (
-                    <Tab 
+                {Object.keys(FLUX).map((key, id) => (
+                    <button 
                         key={id}
-                        id={id}
-                        state={tabState[id]}
-                        emoji={tab.emoji}
-                        title={tab.title}
-                        dataLen={this.state.dataLen}
-                        toggle={this.toggleTabOnClick}
-                    />
+                        className={`btn ${this.state.tabState[id]}`}
+                        onClick={() => this.toggleTabOnClick(id, key)}
+                    >
+                        <span role='img' aria-label='emoji'>{FLUX[key].emoji}</span>&nbsp;{key}
+                        {this.state.tabState[id] === 'active' ? <div className="dataLength">&nbsp;{this.state.dataLen}</div> : null}
+                    </button>
                 ))}
                 </header>
-                <div className={"panel-container " + currentTab}>
-                    {datas.map((el, id) => (
-                        <Panel
-                            key={id}
-                            favicon={this.getFavicon(el.feed)}
-                            title={el.feed.title}
-                            link={el.feed.link}
-                            items={el.items}
-                        />
-                    ))}
-                </div> 
+                <div className={`panel-container ${this.state.currentTab}`}>
+                    {!this.state.isLoaded ? <h1 className="loading">Loading...</h1> :
+                        this.state.datas.map((el, id) => <Panel key={id} id={id} favicon={this.getIcon(el.feed)} title={el.feed.title} link={el.feed.link} items={el.items}/>)}
+                </div>
                 <footer className="footer">
                     <a href="https://github.com/mberger75" target="_blank" rel="noopener noreferrer">
                         Développé par MB
