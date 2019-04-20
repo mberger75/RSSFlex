@@ -46,7 +46,7 @@ class App extends Component {
 
     fetchData() {
         let datas = [];
-        let parser = new RSSParser({timeout: 300, maxRedirects: 10});
+        let parser = new RSSParser();
         const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
         
         this.setState({isLoaded: false});
@@ -60,6 +60,7 @@ class App extends Component {
                     if (err) return;
     
                     datas.push(feed);
+
                     return this.setState({
                         datas: datas,
                         isLoaded: true,
