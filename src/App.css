@@ -134,8 +134,13 @@
     border-color: rgba(99, 99, 99, 0.1);
 }
 .article > .title {
+    font-size: 15px;
     font-weight: bold;
     color: rgb(18, 202, 18);
+}
+.article > .categorie {
+    font-style: italic;
+    font-size: 13px;
 }
 .article > .date {
     font-size: 13px;
@@ -148,6 +153,7 @@
     margin: 25px 10px 0px 0px;
 }
 .article > .description {
+    font-size: 15px;
     color: #000;
 }
 .spacer {

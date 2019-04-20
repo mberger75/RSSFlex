@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Board from './Board';
 import PANEL from './Panel';
-import RSSParser from 'rss-parser';
+import Parser from 'rss-parser';
 import {getCurTime} from './utils';
 import './App.css';
 import './css/Responsive.css';
@@ -14,7 +14,7 @@ class App extends Component {
             datas: [],
             isLoaded: false,
             dataLen: 0,
-            currentTab: 'FRONT',
+            currentTab: 'DEV',
             tabState: Object.keys(PANEL).map(key => PANEL[key].state),
             time: getCurTime(),
         };
@@ -44,8 +44,6 @@ class App extends Component {
     }
 
     checkLocaleStorage() {
-        this.setState({isLoaded: false});
-
         if (localStorage.getItem(this.state.currentTab)) {
             let localDatas = JSON.parse(localStorage.getItem(this.state.currentTab));
             this.setState({
@@ -58,12 +56,12 @@ class App extends Component {
     }
 
     fetchData() {
+        this.setState({isLoaded: false});
+
         let datasParsed = [];
-        let parser = new RSSParser();
+        let parser = new Parser({customFields: {item: ['image']}});
         const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
         let flux = PANEL[this.state.currentTab].flux;
-        
-        this.setState({isLoaded: false});
 
         if(!this.checkLocaleStorage()) {
             Promise.all(flux.map(url => {
@@ -74,7 +72,7 @@ class App extends Component {
 
                     this.setState({
                         datas: datasParsed,
-                        isLoaded: flux.length === datasParsed.length ? true : false,
+                        isLoaded: flux.length === datasParsed.length && true,
                         dataLen: this.getLength(datasParsed)
                     });
 
