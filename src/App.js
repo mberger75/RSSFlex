@@ -43,9 +43,9 @@ class App extends Component {
         return dataLen;
     }
 
-    checkLocaleStorage() {
-        if (localStorage.getItem(this.state.currentTab)) {
-            let localDatas = JSON.parse(localStorage.getItem(this.state.currentTab));
+    checkSessionStorage() {
+        if (sessionStorage.getItem(this.state.currentTab)) {
+            let localDatas = JSON.parse(sessionStorage.getItem(this.state.currentTab));
             this.setState({
                 datas: localDatas,
                 isLoaded: true,
@@ -64,7 +64,7 @@ class App extends Component {
         let flux = PANEL[this.state.currentTab].flux;
         let fluxLen = flux.length;
 
-        if(!this.checkLocaleStorage()) {
+        if(!this.checkSessionStorage()) {
             Promise.all(flux.map(url => {
                 return parser.parseURL(CORS_PROXY + url, (err, feed) => {
                     if (err) return fluxLen--;
@@ -77,10 +77,7 @@ class App extends Component {
                         dataLen: this.getLength(datasParsed)
                     });
 
-                    return localStorage.setItem(
-                            this.state.currentTab,
-                            JSON.stringify(datasParsed)
-                        );
+                    return sessionStorage.setItem(this.state.currentTab,JSON.stringify(datasParsed));
                 });
             }));
         }
