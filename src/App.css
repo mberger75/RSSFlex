@@ -44,12 +44,12 @@
     cursor: pointer;
 }
 .button-tab .active {
-    padding: 7px 11px 7px 11px;
+    padding: 7px;
     font-weight: bold;
     background-color: #C9C9C9;
 }
 
-.panel-container {
+.board-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -59,12 +59,17 @@
     padding: 30px 20px 0px 20px;
     background-color: #C9C9C9;
 }
+.loading {
+    font-size: 23px;
+    color: #fff;
+    text-align: center;
+}
 
-.panel, .header-panel {
+.board, .header-board {
     width: 400px;
 }
 
-.panel {
+.board {
     margin: 0 1% 20px;
     margin-bottom: 20px;
     height: 450px;
@@ -73,39 +78,44 @@
     background-color: #fff;
     box-shadow: inset 0px -30px 30px -20px rgb(201, 201, 201);
 }
-.panel-error {
+.board-error {
     color: #fff;
     background-color: red;
     padding: 20px;
     margin: 10px;
 }
-.panel > .header-panel {
+.board > .header-board {
     position: absolute;
     background-color: rgb(158, 157, 157);
     padding: 10px;
     margin: 0px;
 }
-.header-panel > .icon {
+.header-board > .icon {
     float: left;
     margin-right: 10px;
     width: 17px;
     height: 17px;
 }
-.header-panel > .panelTitle {
+.header-board > .boardTitle {
     text-decoration: none;
     font-weight: bold;
     color: #fff;
     font-size: 13px;
     margin: 0;
 }
-.header-panel > .panelTitle:hover {
+.header-board > .boardTitle:hover {
     text-shadow: 0px 0px 3px rgb(231, 86, 231);
+}
+.header-board > .dataLength {
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
+    padding: 5px;
 }
 
 .articles {
     margin-top: 30px;
 }
-
 .content {
     padding: 10px 10px 0px 10px;
 }
@@ -113,7 +123,6 @@
 .content:hover {
     background-color: rgba(128, 128, 128, 0.2);
 }
-
 .article {
     color: #000;
     text-decoration: none;
@@ -156,12 +165,6 @@
 .btn > .dataLength {
     margin-left: 5px;
     padding: 3px 5px 3px 3px;
-}
-.header-panel > .dataLength {
-    width: 25px;
-    height: 25px;
-    margin-left: 10px;
-    padding: 5px;
 }
 
 .footer {
