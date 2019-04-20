@@ -59,24 +59,28 @@ class App extends Component {
         this.setState({isLoaded: false});
 
         let datasParsed = [];
-        let parser = new Parser({customFields: {item: ['image']}});
-        // FOR TESTING: const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
+        let parser = new Parser();
+        const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
         let flux = PANEL[this.state.currentTab].flux;
+        let fluxLen = flux.length;
 
         if(!this.checkLocaleStorage()) {
             Promise.all(flux.map(url => {
-                return parser.parseURL(url, (err, feed) => { // CORS_PROXY + url
-                    if (err) return;
-    
+                return parser.parseURL(CORS_PROXY + url, (err, feed) => {
+                    if (err) return fluxLen--;
+                    
                     datasParsed.push(feed);
 
                     this.setState({
                         datas: datasParsed,
-                        isLoaded: flux.length === datasParsed.length && true,
+                        isLoaded: fluxLen === datasParsed.length && true,
                         dataLen: this.getLength(datasParsed)
                     });
 
-                    return localStorage.setItem(this.state.currentTab, JSON.stringify(datasParsed));
+                    return localStorage.setItem(
+                            this.state.currentTab,
+                            JSON.stringify(datasParsed)
+                        );
                 });
             }));
         }

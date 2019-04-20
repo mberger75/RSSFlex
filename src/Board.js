@@ -3,23 +3,23 @@ import './App.css';
 
 class Board extends Component {
 
-    stripXml(xml) {
-        let regex = /<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/g;
-        return xml.replace(regex, '');
-    }
-
     checkIfXmlAndReturnExtract = (description) => {
-        let empty = '';
+        const regex = /<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/g;
+        const empty = '';
 
         if (description.trim().charAt(0) === '<') {
-            return this.stripXml(description).trim() !== '' ?
-                this.stripXml(description).substring(0, 140) + '...' : 
-                empty;
+            let cleanDesc = description.replace(regex, '');
+
+            if (cleanDesc.trim().length >= 50) {
+                return cleanDesc.substring(0, 140) + '...';
+            }
+            return empty;
         }
         else {
-            return description.length > 10 ?
-                description.substring(0, 140) + '...' : 
-                empty;
+            if (description.trim().length >= 50) {
+                return description.substring(0, 140) + '...';
+            }
+            return empty;
         }
     }
 
