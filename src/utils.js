@@ -1,9 +1,9 @@
 export const getCurTime = () => {
     let options = {
         timeZone: 'Europe/Paris',
-        weekday: 'long',
-        day: 'numeric',
-        month: 'long',
+        weekday: 'short',
+        day: '2-digit',
+        month: 'short',
         year: 'numeric',
         hour: '2-digit',
         minute: '2-digit',

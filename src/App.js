@@ -14,7 +14,6 @@ class App extends Component {
             datas: [],
             isLoaded: false,
             dataLen: 0,
-            isEmpty: false,
             currentTab: 'FRONT',
             tabState: Object.keys(PANEL).map(key => PANEL[key].state),
             time: getCurTime(),
@@ -31,7 +30,7 @@ class App extends Component {
 
     }
 
-    getLength = datas => {
+    getLength(datas) {
         let dataLen = 0;
 
         if (datas) {
@@ -44,29 +43,42 @@ class App extends Component {
         return dataLen;
     }
 
+    checkLocaleStorage() {
+        this.setState({isLoaded: false});
+
+        if (localStorage.getItem(this.state.currentTab)) {
+            let localDatas = JSON.parse(localStorage.getItem(this.state.currentTab));
+            this.setState({
+                datas: localDatas,
+                isLoaded: true,
+                dataLen: this.getLength(localDatas)
+            });
+            return true;
+        }
+    }
+
     fetchData() {
-        let datas = [];
+        let datasParsed = [];
         let parser = new RSSParser();
         const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
+        let flux = PANEL[this.state.currentTab].flux;
         
         this.setState({isLoaded: false});
 
-        if (PANEL[this.state.currentTab].flux.length <= 0) {
-            return this.setState({isEmpty: true});
-        }
-        else {
-            Promise.all(PANEL[this.state.currentTab].flux.map(url => {
+        if(!this.checkLocaleStorage()) {
+            Promise.all(flux.map(url => {
                 return parser.parseURL(CORS_PROXY + url, (err, feed) => {
                     if (err) return;
     
-                    datas.push(feed);
+                    datasParsed.push(feed);
 
-                    return this.setState({
-                        datas: datas,
-                        isLoaded: true,
-                        isEmpty: false,
-                        dataLen: this.getLength(datas)
+                    this.setState({
+                        datas: datasParsed,
+                        isLoaded: flux.length === datasParsed.length ? true : false,
+                        dataLen: this.getLength(datasParsed)
                     });
+
+                    return localStorage.setItem(this.state.currentTab, JSON.stringify(datasParsed));
                 });
             }));
         }
@@ -76,30 +88,28 @@ class App extends Component {
         setInterval(() => this.setState({time : getCurTime()}), 500);
     }
 
-    componentDidMount() {
-        this.fetchData();
-        this.updateTime();
-    }
-
-    toggleTabOnClick = (id, title) => {
+    toggleClick = (id, title) => {
         let sliced = this.state.tabState.slice();
 
         for (let i = 0; i < sliced.length; i++) {
             i === id ? sliced[i] = 'active' : sliced[i] = '';
         }
 
-        this.setState({
-            tabState: sliced,
-            currentTab: title,
-            dataLen: 0,
-            isEmpty: false
-        }, this.fetchData);
+        if (this.state.isLoaded) {
+            return this.setState({
+                tabState: sliced,
+                currentTab: title,
+                dataLen: 0,
+            }, this.fetchData);
+        }
+        else {
+            return;
+        }
     }
 
-    checkIfEmptyAndReturnVue(isEmpty, curTab) {
-        let state = !isEmpty ? `Loading ${curTab} RSS feeds...` : `${curTab} doesn't have RSS feeds yet`;
-
-        return <h1 className="loading">{state}</h1>
+    componentDidMount() {
+        this.fetchData();
+        this.updateTime();
     }
 
     render() {
@@ -114,10 +124,10 @@ class App extends Component {
                 </header>
                 <header className="button-tab">
                 {Object.keys(PANEL).map((key, id) => (
-                    <button 
+                    <button
                         key={id}
                         className={`btn ${this.state.tabState[id]}`}
-                        onClick={() => this.toggleTabOnClick(id, key)}
+                        onClick={() => this.toggleClick(id, key)}
                     >
                         <span role='img' aria-label='emoji'>{PANEL[key].emoji}</span>&nbsp;{key}
                         {this.state.tabState[id] === 'active' ? 
@@ -128,7 +138,7 @@ class App extends Component {
                 </header>
                 <div className={`board-container ${this.state.currentTab}`}>
                     {!this.state.isLoaded ? 
-                        this.checkIfEmptyAndReturnVue(this.state.isEmpty, this.state.currentTab) 
+                        <h1 className="loading">{`Loading ${this.state.currentTab} RSS feeds...`}</h1>
                     :
                         this.state.datas.map((el, id) => (
                             el ? <Board 

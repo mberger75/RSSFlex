@@ -11,8 +11,6 @@ const PANEL = {
             'https://www.lafermeduweb.net/search-rss.xml?search_veille%5Bsorting%5D=publishedAt-desc&search_veille%5BnbPerPages%5D=10&search_veille%5BdateInterval%5D=&search_veille%5Bauthor%5D=&search_veille%5Blang%5D=all&search_veille%5Bsearch%5D=javascript',
             'https://stackoverflow.com/feeds/tag?tagnames=reactjs&sort=newest',
             'https://stackoverflow.com/feeds/tag?tagnames=javascript&sort=newest',
-            'https://hn.algolia.com/latest.atom',
-            'https://feeds.feedburner.com/Grafikart',
         ]
     },
     'UI/UX': {
@@ -20,8 +18,6 @@ const PANEL = {
         'flux': [
             'https://graphiste.com/blog/feed',
             'http://www.webdesignertrends.com/feed/',
-            'http://feeds.feedburner.com/ILoveTypography',
-            'http://feeds.feedburner.com/webdesignernews',
         ]
     },
     'BACK': {
@@ -36,11 +32,6 @@ const PANEL = {
         'emoji': '📱',
         'flux': [
             'https://korben.info/category/infos/android/?feed=rss',
-        ]
-    },
-    'SOFTWARE': {
-        'emoji': '💿',
-        'flux': [
         ]
     },
     'HARDWARE': {
