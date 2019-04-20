@@ -135,8 +135,8 @@ class App extends Component {
                                     key={id} 
                                     id={id} 
                                     favicon={this.getIcon(el.link)} 
-                                    title={el.title} 
-                                    link={el.link} 
+                                    title={el.title}
+                                    link={el.link}
                                     items={el.items}
                                 /> 
                             : <div key={id} className="board-error">({id}) RSS feed OFF</div>

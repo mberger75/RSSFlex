@@ -23,6 +23,19 @@
         position: relative;
         float: none;
     }
+
+    .header-board > .boardTitle {
+        font-size: 9px;
+    }
+    .header-board > .dataLength {
+        font-size: 9px;
+        width: 17px;
+        height: 17px;
+        padding: 3px;
+    }
+    .article > .title {
+        font-size: 13px;
+    }
 }
 
 @media screen and (max-width: 500px) {
@@ -43,5 +56,8 @@
 @media screen and (max-width: 340px) {
     .board, .board > .header-board {
         width: 250px;
+    }
+    .header-board > .boardTitle {
+        font-size: 7px;
     }
 }
