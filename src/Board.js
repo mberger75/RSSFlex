@@ -23,9 +23,13 @@ class Board extends Component {
         }
     }
 
+    getFormatDate(rawDate) {
+        return `${rawDate.split(' ')[1]} ${rawDate.split(' ')[2]} ${rawDate.split(' ')[3]}`;
+    }
+
     render() {
         const {favicon, title, items, link, id} = this.props;
-
+        // console.log(items[0].categories);
         return (
             <div className={`board ${id}`}>
                 <header className="header-board">
@@ -36,6 +40,7 @@ class Board extends Component {
                 <Articles
                     items={items} 
                     getContent={this.checkIfXmlAndReturnExtract}
+                    getDate={this.getFormatDate}
                 />
                 <div className="spacer"></div>
             </div>
@@ -43,15 +48,14 @@ class Board extends Component {
     }
 }
 
-// {link, content, title, pubDate, description, thumbnail}
-
-const Articles = ({items, getContent}) => (
+const Articles = ({items, getContent, getDate}) => (
     <div className="articles">
         {items.map((el) => (
             <div key={el.link} className="content">
                 <a className="article" href={el.link} target="_blank" rel="noopener noreferrer">
                     <p className="title">{el.title}</p>
-                    <p className="date">{el.pubDate}</p>
+                    <p className="categorie">{el.categories && typeof el.categories[0] === 'string' ? String(el.categories[0]) : ''}</p>
+                    <p className="date">{el.pubDate && getDate(el.pubDate)}</p>
                     <p className="description" dangerouslySetInnerHTML={
                         { __html: getContent(String(el.content)) }
                     }/>
