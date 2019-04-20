@@ -27,14 +27,21 @@ class Board extends Component {
         return `${rawDate.split(' ')[1]} ${rawDate.split(' ')[2]} ${rawDate.split(' ')[3]}`;
     }
 
+    getCleanTitle(link, title) {
+        const regex = /\.(com|net|org|fr|blog|info)\/?$/i;
+
+        return regex.test(link.split('/')[2]) ? link.split('/')[2] : title
+    }
+
     render() {
         const {favicon, title, items, link, id} = this.props;
-        // console.log(items[0].categories);
         return (
             <div className={`board ${id}`}>
                 <header className="header-board">
                     <img className="icon" src={favicon} alt=""/>
-                    <a className="boardTitle" href={link} title={'Lien vers ' + link} target="_blank" rel="noopener noreferrer">{title}</a>
+                    <a className="boardTitle" href={link} title={'Lien vers ' + link} target="_blank" rel="noopener noreferrer">
+                        {this.getCleanTitle(link, title)}
+                    </a>
                     <div className="dataLength">{items.length}</div>
                 </header>
                 <Articles
