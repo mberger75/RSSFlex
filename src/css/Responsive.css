@@ -1,5 +1,5 @@
 @media screen and (max-width: 900px) {
-    .panel {
+    .board {
         margin: 0 auto;
         margin-bottom: 20px;
     }
@@ -26,22 +26,22 @@
 }
 
 @media screen and (max-width: 500px) {
-    .panel-container {
+    .board-container {
         display: block;
         height: 100%;
         padding-bottom: 30px;
     }
-    .panel, .panel > .header-panel {
+    .board, .board > .header-board {
         width: 350px;
     }
 }
 @media screen and (max-width: 400px) {
-    .panel, .panel > .header-panel {
+    .board, .board > .header-board {
         width: 300px;
     }
 }
 @media screen and (max-width: 340px) {
-    .panel, .panel > .header-panel {
+    .board, .board > .header-board {
         width: 250px;
     }
 }
