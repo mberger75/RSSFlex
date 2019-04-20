@@ -1,65 +1,60 @@
-import React, {Component} from 'react';
-import './App.css';
+const PANEL = {
+    'FRONT': {
+        'state': 'active',
+        'emoji': '🎨',
+        'flux': [
+            'https://www.codeur.com/blog/feed/',
+            'https://www.alsacreations.com/rss/actualites.xml',
+            'https://medium.freecodecamp.org/feed',
+            'https://news.humancoders.com/items/feed.rss',
+            'https://korben.info/category/infos/developpement/?feed=rss',
+            'https://www.lafermeduweb.net/search-rss.xml?search_veille%5Bsorting%5D=publishedAt-desc&search_veille%5BnbPerPages%5D=10&search_veille%5BdateInterval%5D=&search_veille%5Bauthor%5D=&search_veille%5Blang%5D=all&search_veille%5Bsearch%5D=javascript',
+            'https://stackoverflow.com/feeds/tag?tagnames=reactjs&sort=newest',
+            'https://stackoverflow.com/feeds/tag?tagnames=javascript&sort=newest',
+            'https://hn.algolia.com/latest.atom',
+            'https://feeds.feedburner.com/Grafikart',
+        ]
+    },
+    'UI/UX': {
+        'emoji' : '🌈',
+        'flux': [
+            'https://graphiste.com/blog/feed',
+            'http://www.webdesignertrends.com/feed/',
+            'http://feeds.feedburner.com/ILoveTypography',
+            'http://feeds.feedburner.com/webdesignernews',
+        ]
+    },
+    'BACK': {
+        'emoji': '🎩',
+        'flux': [
+            'https://stackoverflow.com/feeds/tag?tagnames=php&sort=newest',
+            'https://stackoverflow.com/feeds/tag?tagnames=mysql&sort=newest',
+            'https://stackoverflow.com/feeds/tag?tagnames=wordpress&sort=newest',
+        ]
+    },
+    'MOBILE': {
+        'emoji': '📱',
+        'flux': [
+            'https://korben.info/category/infos/android/?feed=rss',
+        ]
+    },
+    'SOFTWARE': {
+        'emoji': '💿',
+        'flux': [
+        ]
+    },
+    'HARDWARE': {
+        'emoji': '🔌',
+        'flux': [
+            'https://www.dealabs.com/rssx/keyword-alarm/UPAjL9ODne8YxbeWT_PUINfEbDxBAjO_aANHI4Ytghg.',
+        ]
+    },
+    'VRAX': {
+        'emoji': '📹',
+        'flux': [
+            'https://www.youtube.com/feeds/videos.xml?channel_id=UCj_iGliGCkLcHSZ8eqVNPDQ',
+        ]
+    },
+};
 
-class Panel extends Component {
-
-    stripXml(xml) {
-        let regex = /<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/g;
-        return xml.replace(regex, '');
-    }
-
-    checkIfXmlAndReturnExtract = (description) => {
-        let empty = '';
-
-        if (description.trim().charAt(0) === '<') {
-            return this.stripXml(description).trim() !== '' ?
-                this.stripXml(description).substring(0, 140) + '...' : 
-                empty;
-        }
-        else {
-            return description.length > 10 ?
-                description.substring(0, 140) + '...' : 
-                empty;
-        }
-    }
-
-    render() {
-        const {favicon, title, items, link, id} = this.props;
-
-        return (
-            <div className={`panel ${id}`}>
-                <header className="header-panel">
-                    <img className="icon" src={favicon} alt=""/>
-                    <a className="panelTitle" href={link} title={'Lien vers ' + link} target="_blank" rel="noopener noreferrer">{title}</a>
-                    <div className="dataLength">{items.length}</div>
-                </header>
-                <Articles
-                    items={items} 
-                    getContent={this.checkIfXmlAndReturnExtract}
-                />
-                <div className="spacer"></div>
-            </div>
-        )
-    }
-}
-
-// {link, content, title, pubDate, description, thumbnail}
-
-const Articles = ({items, getContent}) => (
-    <div className="articles">
-        {items.map((el) => (
-            <div key={el.link} className="content">
-                <a className="article" href={el.link} target="_blank" rel="noopener noreferrer">
-                    <p className="title">{el.title}</p>
-                    <p className="date">{el.pubDate}</p>
-                    <p className="description" dangerouslySetInnerHTML={
-                        { __html: getContent(String(el.content)) }
-                    }/>
-                    <hr/>
-                </a>
-            </div>
-        ))}
-    </div>
-)
-
-export default Panel;
+export default PANEL;

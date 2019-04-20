@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import Panel from './Panel';
-import FLUX from './Flux';
-import Parser from 'rss-parser';
+import Board from './Board';
+import PANEL from './Panel';
+import RSSParser from 'rss-parser';
 import {getCurTime} from './utils';
 import './App.css';
 import './css/Responsive.css';
@@ -13,23 +13,22 @@ class App extends Component {
         this.state = {
             datas: [],
             isLoaded: false,
-            time: getCurTime(),
-            currentTab: 'FRONT',
-            tabState: Object.keys(FLUX).map(key => FLUX[key].state ? FLUX[key].state : FLUX[key].state = 'inactive'),
             dataLen: 0,
+            isEmpty: false,
+            currentTab: 'FRONT',
+            tabState: Object.keys(PANEL).map(key => PANEL[key].state),
+            time: getCurTime(),
         };
     }
 
     getIcon(link) {
+        const size = 144;
+        const regex = /\.(com|net|org|fr|blog|info)\/?$/i;
 
-        let shortLink = link.split('/')[2];
+        let url = regex.test(link.split('/')[2]) ? link.split('/')[2] : 'rss.com';
 
-        if (link) {
-            return `https://api.faviconkit.com/${shortLink}/144`;
-        }
-        else {
-            return `https://api.faviconkit.com/rss.com/144`;;
-        }
+        return `https://api.faviconkit.com/${url}/${size}`;
+
     }
 
     getLength = datas => {
@@ -38,30 +37,38 @@ class App extends Component {
         if (datas) {
             datas.map(el => el ? dataLen += el.items.length : dataLen);
         }
+        else {
+            dataLen = 0;
+        }
 
         return dataLen;
     }
 
-    async fetchData() {
+    fetchData() {
         let datas = [];
-        let parser = new Parser({
-            timeout: 1000,
-            maxRedirects: 10,
-        });
+        let parser = new RSSParser({timeout: 300, maxRedirects: 10});
         const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
         
         this.setState({isLoaded: false});
 
-        await Promise.all(FLUX[this.state.currentTab].links.map(async url => {
-            let feed = await parser.parseURL(CORS_PROXY + url);
-            datas.push(feed);
-            return this.setState({
-                datas: datas,
-                isLoaded: true,
-                dataLen: this.getLength(datas)
-            });
-        }));
-
+        if (PANEL[this.state.currentTab].flux.length <= 0) {
+            return this.setState({isEmpty: true});
+        }
+        else {
+            Promise.all(PANEL[this.state.currentTab].flux.map(url => {
+                return parser.parseURL(CORS_PROXY + url, (err, feed) => {
+                    if (err) return;
+    
+                    datas.push(feed);
+                    return this.setState({
+                        datas: datas,
+                        isLoaded: true,
+                        isEmpty: false,
+                        dataLen: this.getLength(datas)
+                    });
+                });
+            }));
+        }
     }
 
     updateTime() {
@@ -83,11 +90,18 @@ class App extends Component {
         this.setState({
             tabState: sliced,
             currentTab: title,
+            dataLen: 0,
+            isEmpty: false
         }, this.fetchData);
     }
 
+    checkIfEmptyAndReturnVue(isEmpty, curTab) {
+        let state = !isEmpty ? `Loading ${curTab} RSS feeds...` : `${curTab} doesn't have RSS feeds yet`;
+
+        return <h1 className="loading">{state}</h1>
+    }
+
     render() {
-        // console.log(this.state.datas)
         return (
             <div className="App">
                 <header className="header-app">
@@ -98,31 +112,33 @@ class App extends Component {
                     <p className="current-time">{this.state.time}</p>
                 </header>
                 <header className="button-tab">
-                {Object.keys(FLUX).map((key, id) => (
+                {Object.keys(PANEL).map((key, id) => (
                     <button 
                         key={id}
                         className={`btn ${this.state.tabState[id]}`}
                         onClick={() => this.toggleTabOnClick(id, key)}
                     >
-                        <span role='img' aria-label='emoji'>{FLUX[key].emoji}</span>&nbsp;{key}
+                        <span role='img' aria-label='emoji'>{PANEL[key].emoji}</span>&nbsp;{key}
                         {this.state.tabState[id] === 'active' ? 
                             <div className="dataLength">&nbsp;{this.state.dataLen}</div> 
                             : null}
                     </button>
                 ))}
                 </header>
-                <div className={`panel-container ${this.state.currentTab}`}>
-                    {!this.state.isLoaded ? <h1 className="loading">Loading...</h1> :
+                <div className={`board-container ${this.state.currentTab}`}>
+                    {!this.state.isLoaded ? 
+                        this.checkIfEmptyAndReturnVue(this.state.isEmpty, this.state.currentTab) 
+                    :
                         this.state.datas.map((el, id) => (
-                            el ? 
-                                <Panel 
-                                    key={id} id={id} 
+                            el ? <Board 
+                                    key={id} 
+                                    id={id} 
                                     favicon={this.getIcon(el.link)} 
                                     title={el.title} 
                                     link={el.link} 
                                     items={el.items}
                                 /> 
-                            : <div key={id} className="panel-error">FLUX({id}) HS</div>
+                            : <div key={id} className="board-error">({id}) RSS feed OFF</div>
                         ))}
                 </div>
                 <footer className="footer">
