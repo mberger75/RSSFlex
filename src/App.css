@@ -73,6 +73,12 @@
     background-color: #fff;
     box-shadow: inset 0px -30px 30px -20px rgb(201, 201, 201);
 }
+.panel-error {
+    color: #fff;
+    background-color: red;
+    padding: 20px;
+    margin: 10px;
+}
 .panel > .header-panel {
     position: absolute;
     background-color: rgb(158, 157, 157);

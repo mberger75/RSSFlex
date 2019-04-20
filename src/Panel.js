@@ -23,13 +23,6 @@ class Panel extends Component {
         }
     }
 
-    getFrFormatDate(timestamp) {
-        let date = timestamp.split(' ')[0].split('-');
-        let time = timestamp.split(' ')[1].substring(0, 5);
-
-        return `Le ${date[2]}/${date[1]}/${date[0]} à ${time}`;
-    }
-
     render() {
         const {favicon, title, items, link, id} = this.props;
 
@@ -42,7 +35,6 @@ class Panel extends Component {
                 </header>
                 <Articles
                     items={items} 
-                    getDate={this.getFrFormatDate} 
                     getContent={this.checkIfXmlAndReturnExtract}
                 />
                 <div className="spacer"></div>
@@ -51,17 +43,18 @@ class Panel extends Component {
     }
 }
 
-const Articles = ({items, getDate, getContent}) => (
+// {link, content, title, pubDate, description, thumbnail}
+
+const Articles = ({items, getContent}) => (
     <div className="articles">
-        {items.map(({link, content, title, pubDate, description, thumbnail}) => (
-            <div key={link} className="content">
-                <a className="article" href={link} target="_blank" rel="noopener noreferrer">
-                    {thumbnail ? <img src={thumbnail} className="thumbnail" alt="thumbnail"></img> : ''}
-                    <p className="title">{title}</p>
-                    <p className="date">{getDate(pubDate)}</p>
-                    <p className="description">
-                        {content.length > 30 ? getContent(content) : getContent(description)}
-                    </p>
+        {items.map((el) => (
+            <div key={el.link} className="content">
+                <a className="article" href={el.link} target="_blank" rel="noopener noreferrer">
+                    <p className="title">{el.title}</p>
+                    <p className="date">{el.pubDate}</p>
+                    <p className="description" dangerouslySetInnerHTML={
+                        { __html: getContent(String(el.content)) }
+                    }/>
                     <hr/>
                 </a>
             </div>

@@ -2,7 +2,7 @@ const FLUX = {
     'FRONT': {
         'state': 'active',
         'emoji': '🎨',
-        'url': [
+        'links': [
             'https://www.codeur.com/blog/feed/',
             'https://feeds.feedburner.com/Grafikart',
             'https://www.alsacreations.com/rss/actualites.xml',
@@ -17,7 +17,7 @@ const FLUX = {
     },
     'UI/UX': {
         'emoji' : '🌈',
-        'url': [
+        'links': [
             'https://graphiste.com/blog/feed',
             'http://feeds.feedburner.com/ILoveTypography',
             'http://www.webdesignertrends.com/feed/',
@@ -26,35 +26,35 @@ const FLUX = {
     },
     'BACK': {
         'emoji': '🎩',
-        'url': [
+        'links': [
             'https://stackoverflow.com/feeds/tag?tagnames=php&sort=newest',
             'https://stackoverflow.com/feeds/tag?tagnames=mysql&sort=newest',
-            'https://stackoverflow.com/feeds/tag?tagnames=wordpress&sort=newest'
+            'https://stackoverflow.com/feeds/tag?tagnames=wordpress&sort=newest',
         ]
     },
     'MOBILE': {
         'emoji': '📱',
-        'url': [
-            'https://korben.info/category/infos/android/?feed=rss'
+        'links': [
+            'https://korben.info/category/infos/android/?feed=rss',
+        ]
+    },
+    'SOFTWARE': {
+        'emoji': '💿',
+        'links': [
         ]
     },
     'HARDWARE': {
         'emoji': '🔌',
-        'url': [
-            'https://www.dealabs.com/rssx/keyword-alarm/UPAjL9ODne8YxbeWT_PUINfEbDxBAjO_aANHI4Ytghg.'
+        'links': [
+            'https://www.dealabs.com/rssx/keyword-alarm/UPAjL9ODne8YxbeWT_PUINfEbDxBAjO_aANHI4Ytghg.',
         ]
     },
-    'VIDEOS': {
+    'VRAX': {
         'emoji': '📹',
-        'url': [
-            'https://www.youtube.com/feeds/videos.xml?channel_id=UCj_iGliGCkLcHSZ8eqVNPDQ'
+        'links': [
+            'https://www.youtube.com/feeds/videos.xml?channel_id=UCj_iGliGCkLcHSZ8eqVNPDQ',
         ]
     },
-};
-
-export const API = {
-    url: 'https://api.rss2json.com/v1/api.json?rss_url=',
-    key: '&api_key=jlnbzevd1d5rwe7egbxrjfwxkpgdh8lpfyusedik'
 };
 
 export default FLUX;

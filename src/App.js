@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import Panel from './Panel';
-import FLUX, {API} from './Flux';
+import FLUX from './Flux';
+import Parser from 'rss-parser';
 import {getCurTime} from './utils';
 import './App.css';
-import './Responsive.css';
-import './PanelScrollbar.css';
+import './css/Responsive.css';
+import './css/PanelScrollbar.css';
 
 class App extends Component {
     constructor() {
@@ -19,49 +20,56 @@ class App extends Component {
         };
     }
 
-    getIcon(feed) {
-        if (feed) {
-            let shortUrl = feed.link.split('/')[2];
-    
-            if(feed.image.trim() === '') {
-                return `https://api.faviconkit.com/${shortUrl}/144`;
-            }
-            else {
-                return feed.image;
-            }
+    getIcon(link) {
+
+        let shortLink = link.split('/')[2];
+
+        if (link) {
+            return `https://api.faviconkit.com/${shortLink}/144`;
         }
         else {
-            return `https://api.faviconkit.com/rss.com/144`;
+            return `https://api.faviconkit.com/rss.com/144`;;
         }
     }
 
-    getItemArrLength = (datas) => {
+    getLength = datas => {
         let dataLen = 0;
-        datas.map(el => dataLen += el.items.length);
+
+        if (datas) {
+            datas.map(el => el ? dataLen += el.items.length : dataLen);
+        }
+
         return dataLen;
     }
 
-    fetchData() {
-        let promises = FLUX[this.state.currentTab].url.map(url => {
-            return fetch(API.url + encodeURIComponent(url) + API.key)
+    async fetchData() {
+        let datas = [];
+        let parser = new Parser({
+            timeout: 1000,
+            maxRedirects: 10,
         });
+        const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
+        
+        this.setState({isLoaded: false});
 
-        Promise.all(promises)
-        .then(results => Promise.all(results.map(res => res.json())))
-        .then(datas => this.setState({
-            datas: datas, 
-            isLoaded: true, 
-            dataLen: this.getItemArrLength(datas)
-        }))
-        .catch(err => console.log(err));
+        await Promise.all(FLUX[this.state.currentTab].links.map(async url => {
+            let feed = await parser.parseURL(CORS_PROXY + url);
+            datas.push(feed);
+            return this.setState({
+                datas: datas,
+                isLoaded: true,
+                dataLen: this.getLength(datas)
+            });
+        }));
+
     }
 
     updateTime() {
-        setInterval(() => this.setState({time : getCurTime()}), 1000);
+        setInterval(() => this.setState({time : getCurTime()}), 500);
     }
 
     componentDidMount() {
-        this.fetchData(this.state.currentTab);
+        this.fetchData();
         this.updateTime();
     }
 
@@ -79,6 +87,7 @@ class App extends Component {
     }
 
     render() {
+        // console.log(this.state.datas)
         return (
             <div className="App">
                 <header className="header-app">
@@ -96,13 +105,25 @@ class App extends Component {
                         onClick={() => this.toggleTabOnClick(id, key)}
                     >
                         <span role='img' aria-label='emoji'>{FLUX[key].emoji}</span>&nbsp;{key}
-                        {this.state.tabState[id] === 'active' ? <div className="dataLength">&nbsp;{this.state.dataLen}</div> : null}
+                        {this.state.tabState[id] === 'active' ? 
+                            <div className="dataLength">&nbsp;{this.state.dataLen}</div> 
+                            : null}
                     </button>
                 ))}
                 </header>
                 <div className={`panel-container ${this.state.currentTab}`}>
                     {!this.state.isLoaded ? <h1 className="loading">Loading...</h1> :
-                        this.state.datas.map((el, id) => <Panel key={id} id={id} favicon={this.getIcon(el.feed)} title={el.feed.title} link={el.feed.link} items={el.items}/>)}
+                        this.state.datas.map((el, id) => (
+                            el ? 
+                                <Panel 
+                                    key={id} id={id} 
+                                    favicon={this.getIcon(el.link)} 
+                                    title={el.title} 
+                                    link={el.link} 
+                                    items={el.items}
+                                /> 
+                            : <div key={id} className="panel-error">FLUX({id}) HS</div>
+                        ))}
                 </div>
                 <footer className="footer">
                     <a href="https://github.com/mberger75" target="_blank" rel="noopener noreferrer">
