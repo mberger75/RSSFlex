@@ -6,6 +6,7 @@ import {getCurTime, a} from './utils';
 import './App.css';
 import './css/Responsive.css';
 import './css/PanelScrollbar.css';
+import arrow from './arrow-up.png';
 
 class App extends Component {
     constructor() {
@@ -17,6 +18,7 @@ class App extends Component {
             currentTab: 'DEV',
             tabState: Object.keys(PANEL).map(key => PANEL[key].state),
             time: getCurTime(),
+            isScrolled: false,
         };
     }
 
@@ -101,26 +103,40 @@ class App extends Component {
         this.fetchData();
     }
 
-    componentDidMount() {
-        this.fetchData();
-        this.updateTime();
-    }
-
     header = (title, slogan, time) => (
         <header className="header-app">
             <div className="prez">
                 <h1>{title}</h1>
                 <p className="slogan">{slogan}</p>
             </div>
-            <p className="current-time">
-                {time}
-                <div className="refresh" title="Clear session" onClick={this.clearSession}>⟳</div>
-            </p>
+            <p className="current-time">{time}</p>
+            <div className="refresh" title="Clear session" onClick={this.clearSession}>⟳</div>
             <a href='https://github.com/mberger75' title='Check my Github!' target={a.b} rel={a.r}>
-                <img src="https://bit.ly/2IuMMdr" alt="Github"></img>
+                <img src="https://bit.ly/2IuMMdr" alt="Github" />
             </a>
         </header>
     )
+
+    handleScroll = () => {
+        window.onscroll = e => {
+            if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight / 3) {
+                return this.setState({isScrolled: true});
+            }
+            return this.setState({isScrolled: false});
+        };
+    }
+
+
+
+    componentDidMount() {
+        this.fetchData();
+        this.updateTime();
+        window.addEventListener('scroll', this.handleScroll);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.handleScroll);
+    }
 
     render() {
         const {isLoaded, datas, totalItemsLen, currentTab, tabState, time} = this.state;
@@ -137,15 +153,13 @@ class App extends Component {
                 ))}
                 </div>
                 <div className={`board-container ${currentTab}`}>
-                    {!isLoaded ? 
-                        <h1 className="loading">{`Loading ${currentTab} RSS feeds...`}</h1>
-                    :
-                        datas.map((el, id) => <Board key={id}  id={id} feed={el}/>
-                    )}
+                    {!isLoaded ? <h1 className="loading">{`Loading ${currentTab} RSS feeds...`}</h1>
+                    : datas.map((el, id) => <Board key={id} id={id} feed={el}/>)}
                 </div>
-                <footer className="footer">
-                    <button onClick={this.upPageClick}>🢁</button>
-                </footer>
+                <div className={this.state.isScrolled ? 'btn-top' : 'btn-top-off'}
+                    onClick={this.upPageClick}>
+                    <img src={arrow} title="Top" alt="Top"/>
+                </div>
             </div>
         )
     }

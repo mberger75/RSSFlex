@@ -190,30 +190,28 @@
     padding: 3px 5px 3px 3px;
 }
 
-.footer {
+.btn-top {
+    cursor: pointer;
     position: fixed;
     width: 30px;
     height: 30px;
     padding: 3px;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.3);
-    color: #fff;
+    background-color: rgb(255, 255, 255);
+    opacity: .3;
     bottom: 5px;
     right: 5px;
-    transition: 0.2s;
-}
-.footer:hover {
-    cursor: pointer;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.8);
     transition: 0.3s;
 }
-.footer > button {
-    color: #fff;
-    background: none;
-    outline: none;
-    border: none;
+.btn-top:hover {
+    opacity: 1;
+    transition: 0.3s;
 }
-.footer > button:hover {
-    cursor: pointer;
+.btn-top > img {
+    width: 25px;
+    height: 25px;
+    padding: 3px;
+}
+.btn-top-off {
+    display: none;
 }
