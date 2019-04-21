@@ -13,7 +13,7 @@ class App extends Component {
         this.state = {
             datas: [],
             isLoaded: false,
-            dataLen: 0,
+            totalItemsLen: 0,
             currentTab: 'DEV',
             tabState: Object.keys(PANEL).map(key => PANEL[key].state),
             time: getCurTime(),
@@ -30,14 +30,11 @@ class App extends Component {
 
     }
 
-    getLength(datas) {
+    getTotalItemsLen(datas) {
         let dataLen = 0;
 
         if (datas) {
             datas.map(el => el ? dataLen += el.items.length : dataLen);
-        }
-        else {
-            dataLen = 0;
         }
 
         return dataLen;
@@ -45,11 +42,11 @@ class App extends Component {
 
     checkSessionStorage() {
         if (sessionStorage.getItem(this.state.currentTab)) {
-            let localDatas = JSON.parse(sessionStorage.getItem(this.state.currentTab));
+            let sessionDatas = JSON.parse(sessionStorage.getItem(this.state.currentTab));
             this.setState({
-                datas: localDatas,
+                datas: sessionDatas,
                 isLoaded: true,
-                dataLen: this.getLength(localDatas)
+                totalItemsLen: this.getTotalItemsLen(sessionDatas)
             });
             return true;
         }
@@ -65,13 +62,13 @@ class App extends Component {
             Promise.all(flux.map(url => {
                 return parser.parseURL(`https://cors-anywhere.herokuapp.com/${url}`, (err, feed) => {
                     if (err) return;
-                    
+
                     datasParsed.push(feed);
 
                     return this.setState({
                         datas: datasParsed,
                         isLoaded: true,
-                        dataLen: this.getLength(datasParsed)
+                        totalItemsLen: this.getTotalItemsLen(datasParsed)
                     }, 
                         // sessionStorage.setItem(this.state.currentTab, JSON.stringify(datasParsed))
                     );
@@ -95,7 +92,7 @@ class App extends Component {
             return this.setState({
                 tabState: sliced,
                 currentTab: title,
-                dataLen: 0,
+                totalItemsLen: 0,
             }, this.fetchData);
         }
         else {
@@ -109,7 +106,7 @@ class App extends Component {
     }
 
     render() {
-        const {isLoaded, datas, dataLen, currentTab, tabState, time} = this.state;
+        const {isLoaded, datas, totalItemsLen, currentTab, tabState, time} = this.state;
 
         return (
             <div className="App">
@@ -119,6 +116,9 @@ class App extends Component {
                         <p className="slogan">Simple dashboard</p>
                     </div>
                     <p className="current-time">{time}</p>
+                    <a href="https://github.com/mberger75" title="github.com/mberger75" target="_blank" rel="noopener noreferrer">
+                        <img src="https://bit.ly/2IuMMdr" alt="Github"></img>
+                    </a>
                 </header>
                 <header className="button-tab">
                 {Object.keys(PANEL).map((key, id) => (
@@ -129,7 +129,7 @@ class App extends Component {
                     >
                         <span role='img' aria-label='emoji'>{PANEL[key].emoji}</span>&nbsp;{key}
                         {tabState[id] === 'active' ? 
-                            <div className="dataLength">&nbsp;{dataLen}</div> 
+                            <div className="totalItemsLen">&nbsp;{totalItemsLen}</div>
                             : null}
                     </button>
                 ))}
@@ -142,18 +142,15 @@ class App extends Component {
                             <Board 
                                 key={id} 
                                 id={id} 
-                                favicon={this.getIcon(el.link)} 
+                                favicon={this.getIcon(el.link)}
                                 title={el.title}
                                 link={el.link}
                                 items={el.items}
-                            /> 
+                            />
                         ))}
                 </div>
                 <footer className="footer">
-                    <a href="https://github.com/mberger75" target="_blank" rel="noopener noreferrer">
-                        Développé par MB
-                        <img src="https://bit.ly/2IuMMdr" alt="Github"></img>
-                    </a>
+
                 </footer>
             </div>
         )

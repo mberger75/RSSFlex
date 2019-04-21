@@ -34,14 +34,14 @@ class Board extends Component {
 
     article = items => (
         <div className="articles">
-            {items.map((el) => (
-                <div key={el.link} className="content">
-                    <a className="article" href={el.link} title={el.link} target="_blank" rel="noopener noreferrer">
-                        <p className="title">{el.title}</p>
-                        <p className="categorie">{this.getFirstCategory(el.categories)}</p>
-                        <p className="date">{this.getDateString(el.pubDate)}</p>
+            {items.map((item) => (
+                <div key={item.link} className="content">
+                    <a className="article" href={item.link} title={item.link} target="_blank" rel="noopener noreferrer">
+                        <p className="title">{item.title}</p>
+                        <p className="categorie">{this.getFirstCategory(item.categories)}</p>
+                        <p className="date">{this.getDateString(item.pubDate)}</p>
                         <p className="description" dangerouslySetInnerHTML={
-                            {__html: this.getCleanExtract(String(el.content))}
+                            {__html: this.getCleanExtract(String(item.content))}
                         }/>
                         <hr/>
                     </a>
@@ -60,7 +60,7 @@ class Board extends Component {
                     <a className="boardTitle" href={link} title={link} target="_blank" rel="noopener noreferrer">
                         {this.getCleanTitle(link, title)}
                     </a>
-                    <div className="dataLength">{items.length}</div>
+                    <div className="itemLen">{items.length}</div>
                 </header>
                 {this.article(items)}
                 <div className="spacer"></div>

@@ -30,6 +30,14 @@
 .current-time {
     text-align: center;
 }
+.header-app > a > img {
+    position: absolute;
+    float: right;
+    top: 9px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+}
 
 .button-tab {
     background-color: transparent;
@@ -106,7 +114,7 @@
 .header-board > .boardTitle:hover {
     text-shadow: 0px 0px 3px rgb(231, 86, 231);
 }
-.header-board > .dataLength {
+.header-board > .itemLen {
     width: 25px;
     height: 25px;
     margin-left: 10px;
@@ -159,7 +167,7 @@
 .spacer {
     height: 55px;
 }
-.dataLength {
+.totalItemsLen, .itemLen {
     text-align: center;
     display: inline-block;
     background-color: rgba(46, 46, 46, 0.3);
@@ -168,7 +176,7 @@
     font-weight: bold;
     border-radius: 3px;
 }
-.btn > .dataLength {
+.btn > .totalItemsLen {
     margin-left: 5px;
     padding: 3px 5px 3px 3px;
 }
@@ -188,15 +196,4 @@
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.8);
     transition: 0.3s;
-}
-.footer > a {
-    text-decoration: none;
-    color: #fff;
-}
-.footer > a > img {
-    float: right;
-    margin-right: 15px;
-    margin-left: -5px;
-    width: 20px;
-    height: 20px;
 }
