@@ -61,10 +61,10 @@ class App extends Component {
                         isLoaded: true,
                         totalItemsLen: this.getTotalItemsLen(datasParsed)
                     }, 
-                        // sessionStorage.setItem(
-                        //     this.state.currentTab, 
-                        //     JSON.stringify(datasParsed)
-                        // )
+                        sessionStorage.setItem(
+                            this.state.currentTab, 
+                            JSON.stringify(datasParsed)
+                        )
                     );
                 });
             }));
