@@ -95,17 +95,12 @@
     background-color: #fff;
     box-shadow: inset 0px -30px 30px -20px rgb(201, 201, 201);
 }
-.board-error {
-    color: #fff;
-    background-color: red;
-    padding: 20px;
-    margin: 10px;
-}
 .board > .header-board {
     position: absolute;
     background-color: rgb(158, 157, 157);
     padding: 10px;
     margin: 0px;
+    z-index: 999;
 }
 .header-board > .icon {
     float: left;
@@ -129,9 +124,13 @@
     margin-left: 10px;
     padding: 5px;
 }
-
+article {
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
 .articles:nth-child(2){
-    margin-top: 30px;
+    margin-top: 45px;
 }
 .content {
     padding: 10px 10px 0px 10px;
@@ -143,6 +142,15 @@
 .article {
     color: #000;
     text-decoration: none;
+}
+.article-seen {
+    opacity: 0.5;
+}
+.article-seen::before{
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    content: "✔️";
 }
 .article > hr {
     padding: 0;

@@ -43,8 +43,16 @@ class Board extends Component {
 
     }
 
+    itemSeen(e) {
+        const seenClass = "article-seen";
+
+        if (!e.currentTarget.classList.contains(seenClass)) {
+            return e.currentTarget.classList.add(seenClass);
+        }
+    }
+
     generateItem = item => (
-        <article key={item.link} className="articles">
+        <article key={item.link} className="articles" onClick={(e) => this.itemSeen(e)}>
             <div className="content">
                 <a className="article" href={item.link} title={item.link} target={a.b} rel={a.r}>
                     <p className="title">{item.title}</p>
