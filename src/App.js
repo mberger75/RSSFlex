@@ -28,7 +28,6 @@ class App extends Component {
         if (datas) {
             datas.map(el => el ? dataLen += el.items.length : dataLen);
         }
-
         return dataLen;
     }
 
@@ -125,8 +124,6 @@ class App extends Component {
             return this.setState({isScrolled: false});
         };
     }
-
-
 
     componentDidMount() {
         this.fetchData();
