@@ -3,28 +3,17 @@ import './App.css';
 
 class Board extends Component {
 
-    checkIfXmlAndReturnExtract = (description) => {
-        const regex = /<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/g;
-        const empty = '';
+    getCleanExtract = (description) => {
+        const def = 'No description';
+        
+        const shorten = str => str.substring(0, 140) + '...';
+        const cleanXml = description.replace(/<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/g, '');
 
-        if (description.trim().charAt(0) === '<') {
-            let cleanDesc = description.replace(regex, '');
-
-            if (cleanDesc.trim().length >= 50) {
-                return cleanDesc.substring(0, 140) + '...';
-            }
-            return empty;
+        if (description.trim().charAt(0) !== '<') {
+            return description.trim().length >= 50 ? shorten(description) : def;
         }
-        else {
-            if (description.trim().length >= 50) {
-                return description.substring(0, 140) + '...';
-            }
-            return empty;
-        }
-    }
 
-    getFormatDate(rawDate) {
-        return `${rawDate.split(' ')[1]} ${rawDate.split(' ')[2]} ${rawDate.split(' ')[3]}`;
+        return cleanXml.trim().length >= 50 ? shorten(cleanXml) : def;
     }
 
     getCleanTitle(link, title) {
@@ -33,44 +22,51 @@ class Board extends Component {
         return regex.test(link.split('/')[2]) ? link.split('/')[2] : title
     }
 
+    getFirstCategory(categories) {
+        let def = 'No category';
+
+        return categories && typeof categories[0] === 'string'? String(categories[0]) : def;
+    }
+
+    getDateString(pubDate) {
+        return pubDate ? new Date(pubDate).toLocaleDateString() : 'Unknown date';
+    }
+
+    article = items => (
+        <div className="articles">
+            {items.map((el) => (
+                <div key={el.link} className="content">
+                    <a className="article" href={el.link} title={el.link} target="_blank" rel="noopener noreferrer">
+                        <p className="title">{el.title}</p>
+                        <p className="categorie">{this.getFirstCategory(el.categories)}</p>
+                        <p className="date">{this.getDateString(el.pubDate)}</p>
+                        <p className="description" dangerouslySetInnerHTML={
+                            {__html: this.getCleanExtract(String(el.content))}
+                        }/>
+                        <hr/>
+                    </a>
+                </div>
+            ))}
+        </div>
+    )
+
     render() {
         const {favicon, title, items, link, id} = this.props;
+
         return (
             <div className={`board ${id}`}>
                 <header className="header-board">
                     <img className="icon" src={favicon} alt=""/>
-                    <a className="boardTitle" href={link} title={'Lien vers ' + link} target="_blank" rel="noopener noreferrer">
+                    <a className="boardTitle" href={link} title={link} target="_blank" rel="noopener noreferrer">
                         {this.getCleanTitle(link, title)}
                     </a>
                     <div className="dataLength">{items.length}</div>
                 </header>
-                <Articles
-                    items={items} 
-                    getContent={this.checkIfXmlAndReturnExtract}
-                    getDate={this.getFormatDate}
-                />
+                {this.article(items)}
                 <div className="spacer"></div>
             </div>
         )
     }
 }
-
-const Articles = ({items, getContent, getDate}) => (
-    <div className="articles">
-        {items.map((el) => (
-            <div key={el.link} className="content">
-                <a className="article" href={el.link} target="_blank" rel="noopener noreferrer">
-                    <p className="title">{el.title}</p>
-                    <p className="categorie">{el.categories && typeof el.categories[0] === 'string' ? String(el.categories[0]) : ''}</p>
-                    <p className="date">{el.pubDate && getDate(el.pubDate)}</p>
-                    <p className="description" dangerouslySetInnerHTML={
-                        { __html: getContent(String(el.content)) }
-                    }/>
-                    <hr/>
-                </a>
-            </div>
-        ))}
-    </div>
-)
 
 export default Board;

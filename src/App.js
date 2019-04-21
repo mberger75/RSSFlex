@@ -53,31 +53,28 @@ class App extends Component {
             });
             return true;
         }
+        return false;
     }
 
     fetchData() {
-        this.setState({isLoaded: false});
-
         let datasParsed = [];
         let parser = new Parser();
-        const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
         let flux = PANEL[this.state.currentTab].flux;
-        let fluxLen = flux.length;
 
         if(!this.checkSessionStorage()) {
             Promise.all(flux.map(url => {
-                return parser.parseURL(CORS_PROXY + url, (err, feed) => {
-                    if (err) return fluxLen--;
+                return parser.parseURL(`https://cors-anywhere.herokuapp.com/${url}`, (err, feed) => {
+                    if (err) return;
                     
                     datasParsed.push(feed);
 
-                    this.setState({
+                    return this.setState({
                         datas: datasParsed,
-                        isLoaded: fluxLen === datasParsed.length && true,
+                        isLoaded: true,
                         dataLen: this.getLength(datasParsed)
-                    });
-
-                    return sessionStorage.setItem(this.state.currentTab,JSON.stringify(datasParsed));
+                    }, 
+                        // sessionStorage.setItem(this.state.currentTab, JSON.stringify(datasParsed))
+                    );
                 });
             }));
         }
@@ -112,6 +109,8 @@ class App extends Component {
     }
 
     render() {
+        const {isLoaded, datas, dataLen, currentTab, tabState, time} = this.state;
+
         return (
             <div className="App">
                 <header className="header-app">
@@ -119,36 +118,35 @@ class App extends Component {
                         <h1>RSSFlex</h1>
                         <p className="slogan">Simple dashboard</p>
                     </div>
-                    <p className="current-time">{this.state.time}</p>
+                    <p className="current-time">{time}</p>
                 </header>
                 <header className="button-tab">
                 {Object.keys(PANEL).map((key, id) => (
                     <button
                         key={id}
-                        className={`btn ${this.state.tabState[id]}`}
+                        className={`btn ${tabState[id]}`}
                         onClick={() => this.toggleClick(id, key)}
                     >
                         <span role='img' aria-label='emoji'>{PANEL[key].emoji}</span>&nbsp;{key}
-                        {this.state.tabState[id] === 'active' ? 
-                            <div className="dataLength">&nbsp;{this.state.dataLen}</div> 
+                        {tabState[id] === 'active' ? 
+                            <div className="dataLength">&nbsp;{dataLen}</div> 
                             : null}
                     </button>
                 ))}
                 </header>
-                <div className={`board-container ${this.state.currentTab}`}>
-                    {!this.state.isLoaded ? 
-                        <h1 className="loading">{`Loading ${this.state.currentTab} RSS feeds...`}</h1>
+                <div className={`board-container ${currentTab}`}>
+                    {!isLoaded ? 
+                        <h1 className="loading">{`Loading ${currentTab} RSS feeds...`}</h1>
                     :
-                        this.state.datas.map((el, id) => (
-                            el ? <Board 
-                                    key={id} 
-                                    id={id} 
-                                    favicon={this.getIcon(el.link)} 
-                                    title={el.title}
-                                    link={el.link}
-                                    items={el.items}
-                                /> 
-                            : <div key={id} className="board-error">({id}) RSS feed OFF</div>
+                        datas.map((el, id) => (
+                            <Board 
+                                key={id} 
+                                id={id} 
+                                favicon={this.getIcon(el.link)} 
+                                title={el.title}
+                                link={el.link}
+                                items={el.items}
+                            /> 
                         ))}
                 </div>
                 <footer className="footer">
