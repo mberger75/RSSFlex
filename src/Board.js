@@ -65,7 +65,7 @@ class Board extends Component {
         return (
             <div className={`board ${id}`}>
                 <header className="header-board">
-                    <img className="icon" src={this.getIcon(feed.link)} alt=""/>
+                    <img className="icon" src={this.getIcon(feed.link)} alt="Icon"/>
                     <a className="boardTitle" href={feed.link} title={feed.link} target={a.b} rel={a.r}>
                         {this.getCleanTitle(feed.link, feed.title)}
                     </a>

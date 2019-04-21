@@ -9,8 +9,8 @@ import './css/PanelScrollbar.css';
 import arrow from './arrow-up.png';
 
 class App extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             datas: [],
             isLoaded: false,
@@ -20,6 +20,7 @@ class App extends Component {
             time: getCurTime(),
             isScrolled: false,
         };
+        this.boardRef = React.createRef();
     }
 
     getTotalItemsLen(datas) {
@@ -89,12 +90,14 @@ class App extends Component {
                 tabState: sliced,
                 currentTab: title,
                 totalItemsLen: 0,
+                isScrolled: false
             }, this.fetchData);
  
     }
 
     upPageClick() {
         window.scroll({top: 0, left: 0, behavior: 'smooth'});
+        return this.setState({isScrolled: false});
     }
 
     clearSession = () => {
@@ -117,8 +120,8 @@ class App extends Component {
     )
 
     handleScroll = () => {
-        window.onscroll = e => {
-            if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight / 3) {
+        window.onscroll = () => {
+            if (window.pageYOffset >= this.boardRef.current.offsetTop) {
                 return this.setState({isScrolled: true});
             }
             return this.setState({isScrolled: false});
@@ -137,26 +140,26 @@ class App extends Component {
 
     render() {
         const {isLoaded, datas, totalItemsLen, currentTab, tabState, time} = this.state;
-
+    
         return (
             <div className="App">
                 {this.header('RSSFlex', 'Simple dashboard', time)}
                 <div className="button-tab">
                 {Object.keys(PANEL).map((key, id) => (
                     <button key={id} className={`btn ${tabState[id]}`} onClick={() => this.toggleClick(id, key)}>
-                        <span role='img' aria-label='emoji'>{PANEL[key].emoji}</span>&nbsp;{key}
+                        <span role="img" aria-label="Emoji">{PANEL[key].emoji}</span>&nbsp;{key}
                         {tabState[id] === 'active' && <div className="totalItemsLen">&nbsp;{totalItemsLen}</div>}
                     </button>
                 ))}
                 </div>
-                <div className={`board-container ${currentTab}`}>
+                <div className={`board-container ${currentTab}`} ref={this.boardRef}>
                     {!isLoaded ? <h1 className="loading">{`Loading ${currentTab} RSS feeds...`}</h1>
                     : datas.map((el, id) => <Board key={id} id={id} feed={el}/>)}
                 </div>
-                <div className={this.state.isScrolled ? 'btn-top' : 'btn-top-off'}
-                    onClick={this.upPageClick}>
+                {this.state.isScrolled &&
+                <div className="btn-top" onClick={() => this.upPageClick()}>
                     <img src={arrow} title="Top" alt="Top"/>
-                </div>
+                </div>}
             </div>
         )
     }
