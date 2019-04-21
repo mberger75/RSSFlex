@@ -82,20 +82,23 @@ class App extends Component {
             i === id ? sliced[i] = 'active' : sliced[i] = '';
         }
 
-        if (this.state.isLoaded) {
-            return this.setState({
+        if (!this.state.isLoaded) return;
+            
+        return this.setState({
                 tabState: sliced,
                 currentTab: title,
                 totalItemsLen: 0,
             }, this.fetchData);
-        }
-        else {
-            return;
-        }
+ 
     }
 
-    upPageClick = () => {
+    upPageClick() {
         window.scroll({top: 0, left: 0, behavior: 'smooth'});
+    }
+
+    clearSession = () => {
+        sessionStorage.clear();
+        this.fetchData();
     }
 
     componentDidMount() {
@@ -109,11 +112,13 @@ class App extends Component {
                 <h1>{title}</h1>
                 <p className="slogan">{slogan}</p>
             </div>
-            <p className="current-time">{time}</p>
+            <p className="current-time">
+                {time}
+                <div className="refresh" title="Clear session" onClick={this.clearSession}>⟳</div>
+            </p>
             <a href='https://github.com/mberger75' title='Check my Github!' target={a.b} rel={a.r}>
                 <img src="https://bit.ly/2IuMMdr" alt="Github"></img>
             </a>
-            })}
         </header>
     )
 
