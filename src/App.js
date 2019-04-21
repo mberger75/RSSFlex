@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Board from './Board';
 import PANEL from './Panel';
 import Parser from 'rss-parser';
-import {getCurTime} from './utils';
+import {getCurTime, a} from './utils';
 import './App.css';
 import './css/Responsive.css';
 import './css/PanelScrollbar.css';
@@ -18,16 +18,6 @@ class App extends Component {
             tabState: Object.keys(PANEL).map(key => PANEL[key].state),
             time: getCurTime(),
         };
-    }
-
-    getIcon(link) {
-        const size = 144;
-        const regex = /\.(com|net|org|fr|blog|info)\/?$/i;
-
-        let url = regex.test(link.split('/')[2]) ? link.split('/')[2] : 'rss.com';
-
-        return `https://api.faviconkit.com/${url}/${size}`;
-
     }
 
     getTotalItemsLen(datas) {
@@ -56,13 +46,14 @@ class App extends Component {
     fetchData() {
         let datasParsed = [];
         let parser = new Parser();
+        const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
         let flux = PANEL[this.state.currentTab].flux;
 
         if(!this.checkSessionStorage()) {
             Promise.all(flux.map(url => {
-                return parser.parseURL(`https://cors-anywhere.herokuapp.com/${url}`, (err, feed) => {
+                return parser.parseURL(CORS_PROXY + url, (err, feed) => {
                     if (err) return;
-
+                    
                     datasParsed.push(feed);
 
                     return this.setState({
@@ -70,7 +61,10 @@ class App extends Component {
                         isLoaded: true,
                         totalItemsLen: this.getTotalItemsLen(datasParsed)
                     }, 
-                        // sessionStorage.setItem(this.state.currentTab, JSON.stringify(datasParsed))
+                        // sessionStorage.setItem(
+                        //     this.state.currentTab, 
+                        //     JSON.stringify(datasParsed)
+                        // )
                     );
                 });
             }));
@@ -100,57 +94,52 @@ class App extends Component {
         }
     }
 
+    upPageClick = () => {
+        window.scroll({top: 0, left: 0, behavior: 'smooth'});
+    }
+
     componentDidMount() {
         this.fetchData();
         this.updateTime();
     }
+
+    header = (title, slogan, time) => (
+        <header className="header-app">
+            <div className="prez">
+                <h1>{title}</h1>
+                <p className="slogan">{slogan}</p>
+            </div>
+            <p className="current-time">{time}</p>
+            <a href='https://github.com/mberger75' title='Check my Github!' target={a.b} rel={a.r}>
+                <img src="https://bit.ly/2IuMMdr" alt="Github"></img>
+            </a>
+            })}
+        </header>
+    )
 
     render() {
         const {isLoaded, datas, totalItemsLen, currentTab, tabState, time} = this.state;
 
         return (
             <div className="App">
-                <header className="header-app">
-                    <div className="prez">
-                        <h1>RSSFlex</h1>
-                        <p className="slogan">Simple dashboard</p>
-                    </div>
-                    <p className="current-time">{time}</p>
-                    <a href="https://github.com/mberger75" title="github.com/mberger75" target="_blank" rel="noopener noreferrer">
-                        <img src="https://bit.ly/2IuMMdr" alt="Github"></img>
-                    </a>
-                </header>
-                <header className="button-tab">
+                {this.header('RSSFlex', 'Simple dashboard', time)}
+                <div className="button-tab">
                 {Object.keys(PANEL).map((key, id) => (
-                    <button
-                        key={id}
-                        className={`btn ${tabState[id]}`}
-                        onClick={() => this.toggleClick(id, key)}
-                    >
+                    <button key={id} className={`btn ${tabState[id]}`} onClick={() => this.toggleClick(id, key)}>
                         <span role='img' aria-label='emoji'>{PANEL[key].emoji}</span>&nbsp;{key}
-                        {tabState[id] === 'active' ? 
-                            <div className="totalItemsLen">&nbsp;{totalItemsLen}</div>
-                            : null}
+                        {tabState[id] === 'active' && <div className="totalItemsLen">&nbsp;{totalItemsLen}</div>}
                     </button>
                 ))}
-                </header>
+                </div>
                 <div className={`board-container ${currentTab}`}>
                     {!isLoaded ? 
                         <h1 className="loading">{`Loading ${currentTab} RSS feeds...`}</h1>
                     :
-                        datas.map((el, id) => (
-                            <Board 
-                                key={id} 
-                                id={id} 
-                                favicon={this.getIcon(el.link)}
-                                title={el.title}
-                                link={el.link}
-                                items={el.items}
-                            />
-                        ))}
+                        datas.map((el, id) => <Board key={id}  id={id} feed={el}/>
+                    )}
                 </div>
                 <footer className="footer">
-
+                    <button onClick={this.upPageClick}>🢁</button>
                 </footer>
             </div>
         )

@@ -2,11 +2,6 @@
     text-align: left;
 }
 
-* button {
-    border: none;
-    outline: none;
-}
-
 .App > .header-app {
     background-color: #353536;
     color: #fff;
@@ -33,10 +28,10 @@
 .header-app > a > img {
     position: absolute;
     float: right;
-    top: 9px;
+    top: 15px;
     right: 15px;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
 }
 
 .button-tab {
@@ -44,6 +39,8 @@
     margin-left: 10px;
 }
 .button-tab > .btn {
+    border: none;
+    outline: none;
     padding: 7px 7px 10px 7px;
     margin-right: 5px;
     background-color: #fff;
@@ -121,7 +118,7 @@
     padding: 5px;
 }
 
-.articles {
+.articles:nth-child(2){
     margin-top: 30px;
 }
 .content {
@@ -183,17 +180,28 @@
 
 .footer {
     position: fixed;
-    width: 200px;
-    padding: 5px;
+    width: 30px;
+    height: 30px;
+    padding: 3px;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.3);
     color: #fff;
-    bottom: 0;
-    right: 0;
+    bottom: 5px;
+    right: 5px;
     transition: 0.2s;
 }
 .footer:hover {
     cursor: pointer;
+    color: #fff;
     background-color: rgba(0, 0, 0, 0.8);
     transition: 0.3s;
+}
+.footer > button {
+    color: #fff;
+    background: none;
+    outline: none;
+    border: none;
+}
+.footer > button:hover {
+    cursor: pointer;
 }

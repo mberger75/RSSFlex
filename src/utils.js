@@ -12,3 +12,8 @@ export const getCurTime = () => {
 
     return new Date().toLocaleString('fr-FR', options).replace('à', '|');
 }
+
+export const a = {
+    b: '_blank',
+    r: 'noopener noreferrer'
+}

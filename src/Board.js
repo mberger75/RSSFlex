@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {a} from './utils';
 import './App.css';
 
 class Board extends Component {
@@ -32,37 +33,45 @@ class Board extends Component {
         return pubDate ? new Date(pubDate).toLocaleDateString() : 'Unknown date';
     }
 
-    article = items => (
-        <div className="articles">
-            {items.map((item) => (
-                <div key={item.link} className="content">
-                    <a className="article" href={item.link} title={item.link} target="_blank" rel="noopener noreferrer">
-                        <p className="title">{item.title}</p>
-                        <p className="categorie">{this.getFirstCategory(item.categories)}</p>
-                        <p className="date">{this.getDateString(item.pubDate)}</p>
-                        <p className="description" dangerouslySetInnerHTML={
-                            {__html: this.getCleanExtract(String(item.content))}
-                        }/>
-                        <hr/>
-                    </a>
-                </div>
-            ))}
-        </div>
+    getIcon(link) {
+        const size = 144;
+        const regex = /\.(com|net|org|fr|blog|info)\/?$/i;
+
+        let url = regex.test(link.split('/')[2]) ? link.split('/')[2] : 'rss.com';
+
+        return `https://api.faviconkit.com/${url}/${size}`;
+
+    }
+
+    generateItem = item => (
+        <article key={item.link} className="articles">
+            <div className="content">
+                <a className="article" href={item.link} title={item.link} target={a.b} rel={a.r}>
+                    <p className="title">{item.title}</p>
+                    <p className="categorie">{this.getFirstCategory(item.categories)}</p>
+                    <p className="date">{this.getDateString(item.pubDate)}</p>
+                    <p className="description" dangerouslySetInnerHTML={
+                        {__html: this.getCleanExtract(String(item.content))}
+                    }/>
+                    <hr/>
+                </a>
+            </div>
+        </article>
     )
 
     render() {
-        const {favicon, title, items, link, id} = this.props;
+        const {feed, id} = this.props;
 
         return (
             <div className={`board ${id}`}>
                 <header className="header-board">
-                    <img className="icon" src={favicon} alt=""/>
-                    <a className="boardTitle" href={link} title={link} target="_blank" rel="noopener noreferrer">
-                        {this.getCleanTitle(link, title)}
+                    <img className="icon" src={this.getIcon(feed.link)} alt=""/>
+                    <a className="boardTitle" href={feed.link} title={feed.link} target={a.b} rel={a.r}>
+                        {this.getCleanTitle(feed.link, feed.title)}
                     </a>
-                    <div className="itemLen">{items.length}</div>
+                    <div className="itemLen">{feed.items.length}</div>
                 </header>
-                {this.article(items)}
+                {feed.items.map(item => this.generateItem(item))}
                 <div className="spacer"></div>
             </div>
         )
