@@ -31,7 +31,7 @@
 }
 .icons {
     background-color: #353536;
-    width: 100px;
+    width: 120px;
     position: absolute;
     float: right;
     top: 10px;
@@ -41,19 +41,17 @@
     border-bottom-right-radius: 9px;
     border-bottom-left-radius: 9px;
 }
-.icons > a > img, 
-.refresh {
+.icons img {
     cursor: pointer;
     margin: 1px;
     width: 30px;
     height: 30px;
-    border: 2px solid transparent;
-    border-radius: 0px;
-    transition: 0.3s;
+    border: 2px dotted transparent;
+    border-radius: 0;
+    transition: 0.5s;
 }
-.icons > a > img:hover, 
-.refresh:hover {
-    border: 2px solid #fff;
+.icons img:hover {
+    border: 1px solid rgb(139, 139, 139);
     border-radius: 100%;
     transition: 0.3s;
 }
@@ -72,8 +70,11 @@
 .button-tab > .btn:hover {
     cursor: pointer;
 }
+.btn .tab-emoji {
+    margin-right: 5px;
+}
 .button-tab .active {
-    padding: 7px;
+    padding: 7px 8px 10px 8px;
     font-weight: bold;
     background-color: #C9C9C9;
 }
@@ -88,6 +89,16 @@
     padding: 30px 20px 0px 20px;
     background-color: #C9C9C9;
 }
+.totalItemsLen {
+    width: 100%;
+    color: #fff;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 3px 5px 3px 3px;
+}
+
 .loading {
     font-size: 23px;
     color: #fff;
@@ -131,18 +142,22 @@
 .header-board > .boardTitle:hover {
     text-shadow: 0px 0px 3px rgb(231, 86, 231);
 }
+.seemore {
+    display: none;
+}
 .header-board > .itemLen {
+    float: right;
     width: 25px;
     height: 25px;
     margin-left: 10px;
     padding: 5px;
 }
-article {
+.article {
     cursor: pointer;
     position: relative;
     z-index: 1;
 }
-.articles:nth-child(2){
+.article:nth-child(1){
     margin-top: 45px;
 }
 .content {
@@ -152,7 +167,7 @@ article {
 .content:hover {
     background-color: rgba(128, 128, 128, 0.2);
 }
-.article {
+.content-main {
     color: #000;
     text-decoration: none;
 }
@@ -165,39 +180,38 @@ article {
     right: 15px;
     content: "✔️";
 }
-.article > hr {
+.content-main > hr {
     padding: 0;
     margin: 0;
     height: .5px;
     border-color: rgba(99, 99, 99, 0.1);
 }
-.article > .title {
+.title {
     font-size: 15px;
     font-weight: bold;
     color: rgb(18, 202, 18);
 }
-.article > .categorie {
+.categorie {
     font-style: italic;
     font-size: 13px;
 }
-.article > .date {
+.date {
     font-size: 13px;
     color: rgba(0, 0, 0, 0.5);
 }
-.article > .thumbnail {
+.thumbnail {
     float: left;
     width: 80px;
     height: 60px;
     margin: 25px 10px 0px 0px;
 }
-.article > .description {
+.description {
     font-size: 15px;
     color: #000;
 }
 .spacer {
     height: 55px;
 }
-.totalItemsLen, 
 .itemLen {
     text-align: center;
     display: inline-block;
@@ -206,10 +220,6 @@ article {
     font-size: 13px;
     font-weight: bold;
     border-radius: 3px;
-}
-.btn > .totalItemsLen {
-    margin-left: 5px;
-    padding: 3px 5px 3px 3px;
 }
 
 .btn-top {

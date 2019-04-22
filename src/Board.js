@@ -44,10 +44,12 @@ class Board extends Component {
         }
     }
 
+    // articles => article
+    // article => content-main
     generateItem = item => (
-        <article key={item.link} className="articles" onClick={(e) => this.itemSeen(e)}>
+        <article key={item.link} className="article" onClick={(e) => this.itemSeen(e)}>
             <div className="content">
-                <a className="article" href={item.link} title={item.link} target={a.b} rel={a.r}>
+                <a className="content-main" href={item.link} title={item.link} target={a.b} rel={a.r}>
                     <p className="title">{item.title}</p>
                     <p className="categorie">{this.getFirstCategory(item.categories)}</p>
                     <p className="date">{item.pubDate ? convertDate(item.pubDate) : 'Unknown date'}</p>
@@ -70,9 +72,17 @@ class Board extends Component {
                     <a className="boardTitle" href={feed.link} title={feed.link} target={a.b} rel={a.r}>
                         {this.getCleanTitle(feed.link, feed.title)}
                     </a>
-                    <div className="itemLen">{feed.items.length}</div>
+                    <div className="itemLen">
+                        {feed.items.length}
+                        <div className="seemore">
+                            <span className="plus" role="img" aria-label="Emoji">➕</span>
+                            <span className="less"></span>
+                        </div>
+                    </div>
                 </header>
-                {feed.items.map(item => this.generateItem(item))}
+                <div className="article-wrapper">
+                    {feed.items.map(item => this.generateItem(item))}
+                </div>
                 <div className="spacer"></div>
             </div>
         )

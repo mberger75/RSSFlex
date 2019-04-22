@@ -15,7 +15,8 @@ class Header extends Component {
     updateTime() {
         setInterval(() => {
             this.state.viewWidth > 700 ?
-            this.setState({time : getCurTime('long')}) :
+            this.setState({time : getCurTime('long')})
+            :
             this.setState({time : getCurTime('short')})
         }, 500);
     }

@@ -1,4 +1,4 @@
-const PANEL = {
+export const __PANEL = {
     'DEV': {
         'state': 'active',
         'emoji': '💻',
@@ -45,5 +45,3 @@ const PANEL = {
         ]
     },
 };
-
-export default PANEL;

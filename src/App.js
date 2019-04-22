@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
+import Parser from 'rss-parser';
+import {__PANEL} from './Panel';
+
 import Header from './Header';
 import Board from './Board';
-import PANEL from './Panel';
 import ScrollTop from './ScrollTop';
-import Parser from 'rss-parser';
+
 import './App.css';
 import './css/Responsive.css';
 import './css/PanelScrollbar.css';
@@ -16,7 +18,7 @@ class App extends Component {
             isLoaded: false,
             totalItemsLen: 0,
             currentTab: 'DEV',
-            tabState: Object.keys(PANEL).map(key => PANEL[key].state),
+            tabState: Object.keys(__PANEL).map(key => __PANEL[key].state ? __PANEL[key].state : ''),
         };
         this.boardRef = React.createRef();
     }
@@ -47,7 +49,7 @@ class App extends Component {
         let datasParsed = [];
         let parser = new Parser();
         const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
-        let flux = PANEL[this.state.currentTab].flux;
+        let flux = __PANEL[this.state.currentTab].flux;
 
         if(!this.checkSessionStorage()) {
             Promise.all(flux.map(url => {
@@ -112,14 +114,15 @@ class App extends Component {
                 <Header title='RSSFlex' slogan='Simple dashboard' clearSession={this.clearSession}/>
 
                 <div className="button-tab">
-                {Object.keys(PANEL).map((key, id) => (
-                    <button key={id} className={`btn ${tabState[id]}`} onClick={() => this.toggleClick(id, key)}>
-                        <span role="img" aria-label="Emoji">{PANEL[key].emoji}</span>&nbsp;{key}
-                        {tabState[id] === 'active' && <div className="totalItemsLen">&nbsp;{totalItemsLen}</div>}
+                {Object.keys(__PANEL).map((key, id) => (
+                    <button key={id} className={`btn ${tabState[id]}`} title={key} onClick={() => this.toggleClick(id, key)}>
+                        <span className="tab-emoji" role="img" aria-label="Emoji">{__PANEL[key].emoji}</span>
+                        <span className="tab-name">{key}</span>
                     </button>
                 ))}
                 </div>
                 <div className={`board-container ${currentTab}`} ref={this.boardRef}>
+                    <div className="totalItemsLen">{`${totalItemsLen} articles`}</div>
                     {!isLoaded ? <h1 className="loading">{`Loading ${currentTab} RSS feeds...`}</h1>
                     : datas.map((el, id) => <Board key={id} id={id} feed={el}/>)}
                 </div>

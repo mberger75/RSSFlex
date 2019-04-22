@@ -7,13 +7,21 @@
 
 @media screen and (max-width: 700px) {
     .button-tab {
+        text-align: center;
         margin-bottom: 20px;
     }
     .button-tab > .btn {
-        display: block;
-        width: 70%;
+        display: inline-block;
+        width: 40px;
+        padding: 9px;
         margin: 0 auto;
-        margin-bottom: 5px;
+        margin-right: 5px;
+    }
+    .btn .tab-emoji {
+        margin-right: 0;
+    }
+    .btn .tab-name {
+        display: none;
     }
 
     .header-app {
@@ -31,19 +39,34 @@
         margin: 0 auto;
         right: 0;
     }
+    .board {
+        height: 30px;
+        transition: 0.5s;
+    }
+    .board:hover {
+        height: 450px;
+        transition: 0.5s;
+    }
+    .seemore {
+        display: inline;
+        margin-left: 15px;
+    }
+    .board:hover .plus {
+        display: none;
+    }
+    .board:hover .less::before {
+        content: '➖';
+    }
     .header-board > .boardTitle {
         font-size: 11px;
     }
-    .header-board > .dataLength {
-        font-size: 9px;
-        width: 17px;
-        height: 17px;
-        padding: 3px;
+    .header-board > .itemLen {
+       margin-right: 25px;
     }
-    .article > .title {
+    .title {
         font-size: 13px;
     }
-    .article > .description {
+    .description {
         font-size: 13px;
     }
 }
@@ -70,7 +93,7 @@
     .header-board > .boardTitle {
         font-size: 10px;
     }
-    .article > .description {
+    .description {
         font-size: 11px;
     }
 }
