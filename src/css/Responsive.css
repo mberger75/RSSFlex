@@ -43,20 +43,16 @@
         height: 30px;
         transition: 0.5s;
     }
-    .board:hover {
+    .board-active {
         height: 450px;
         transition: 0.5s;
     }
     .seemore {
+        cursor: pointer;
         display: inline;
         margin-left: 15px;
     }
-    .board:hover .plus {
-        display: none;
-    }
-    .board:hover .less::before {
-        content: '➖';
-    }
+
     .header-board > .boardTitle {
         font-size: 11px;
     }

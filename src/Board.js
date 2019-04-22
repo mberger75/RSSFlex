@@ -1,8 +1,16 @@
 import React, {Component} from 'react';
-import {a, convertDate} from './utils';
+import {a, convertDate} from './Utils';
 import './App.css';
 
 class Board extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            boardClass: '',
+            seemore: '➕'
+        }
+    }
 
     cleanXml = (raw) => {
         const description = String(raw);
@@ -44,8 +52,6 @@ class Board extends Component {
         }
     }
 
-    // articles => article
-    // article => content-main
     generateItem = item => (
         <article key={item.link} className="article" onClick={(e) => this.itemSeen(e)}>
             <div className="content">
@@ -62,11 +68,30 @@ class Board extends Component {
         </article>
     )
 
+    displayBoard = (e) => {
+        let board = e.currentTarget.closest(".board");
+        let activeClass = 'board-active';
+
+        if(!board.classList.contains(activeClass)) {
+            return this.setState({
+                boardClass: activeClass,
+                seemore: '➖'
+            });
+        }
+        else {
+            return this.setState({
+                boardClass: '',
+                seemore: '➕'
+            });
+        }
+    }
+
     render() {
-        const {feed, id} = this.props;
+        const {feed} = this.props;
+        const {boardClass, seemore} = this.state;
 
         return (
-            <div className={`board ${id}`}>
+            <div className={`board ${boardClass}`}>
                 <header className="header-board">
                     <img className="icon" src={this.getIcon(feed.link)} alt="Icon"/>
                     <a className="boardTitle" href={feed.link} title={feed.link} target={a.b} rel={a.r}>
@@ -75,8 +100,9 @@ class Board extends Component {
                     <div className="itemLen">
                         {feed.items.length}
                         <div className="seemore">
-                            <span className="plus" role="img" aria-label="Emoji">➕</span>
-                            <span className="less"></span>
+                            <span className="plus" onClick={(e) => this.displayBoard(e)} role="img" aria-label="Emoji">
+                                {seemore}
+                            </span>
                         </div>
                     </div>
                 </header>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {getCurTime, getSrcImg, a} from './utils';
+import {getCurTime, getSrcImg, a} from './Utils';
 
 class Header extends Component {
     constructor() {

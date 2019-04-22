@@ -20,7 +20,7 @@ class App extends Component {
             currentTab: 'DEV',
             tabState: Object.keys(__PANEL).map(key => __PANEL[key].state ? __PANEL[key].state : ''),
         };
-        this.boardRef = React.createRef();
+        this.boardContainerRef = React.createRef();
     }
 
     getTotalItemsLen(datas) {
@@ -121,12 +121,12 @@ class App extends Component {
                     </button>
                 ))}
                 </div>
-                <div className={`board-container ${currentTab}`} ref={this.boardRef}>
+                <div className={`board-container ${currentTab}`} ref={this.boardContainerRef}>
                     <div className="totalItemsLen">{`${totalItemsLen} articles`}</div>
                     {!isLoaded ? <h1 className="loading">{`Loading ${currentTab} RSS feeds...`}</h1>
                     : datas.map((el, id) => <Board key={id} id={id} feed={el}/>)}
                 </div>
-                <ScrollTop boardRef={this.boardRef}/>
+                <ScrollTop boardContainerRef={this.boardContainerRef}/>
             </div>
         )
     }
