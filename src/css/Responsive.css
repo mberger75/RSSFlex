@@ -18,12 +18,19 @@
 
     .header-app {
         text-align: center;
+        height: 100px!important;
+        margin-bottom: 50px!important;
     }
-    .current-time, .prez, .addFlux-container {
+    .current-time, 
+    .prez, 
+    .icons {
         position: relative;
         float: none;
     }
-
+    .icons {
+        margin: 0 auto;
+        right: 0;
+    }
     .header-board > .boardTitle {
         font-size: 11px;
     }

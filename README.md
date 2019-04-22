@@ -6,4 +6,4 @@ A simple dashboard
 
 => [https://rssflex.netlify.com](https://rssflex.netlify.com)
 
-*This project also serves as a test for continuous deployment on Netlify*
+*This project also serves as a test for continuous deployment through Netlify*

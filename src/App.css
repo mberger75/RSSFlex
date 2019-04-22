@@ -3,17 +3,20 @@
 }
 
 .App > .header-app {
+    height: 60px;
     background-color: #353536;
     color: #fff;
-    padding: 5px 10px 5px 10px;
+    padding: 10px;
     margin: 0px 0px 30px 0px;
     position: relative;
+    align-items: center;
 }
 .prez {
     position: absolute;
     float: left;
 }
-.prez > h1, .slogan {
+.prez > h1, 
+.slogan {
     margin: 0px;
 }
 .prez > h1 {
@@ -23,27 +26,36 @@
     font-style: italic;
 }
 .current-time {
+    margin-top: 10px;
     text-align: center;
-    margin-bottom: 0;
 }
-.refresh {
-    cursor: pointer;
-    width: 40px;
-    height: auto;
-    margin: 5px auto 5px auto;
-    font-size: 25px;
-    color: #fff;
-}
-.refresh:hover {
-    color: red;
-}
-.header-app > a > img {
+.icons {
+    background-color: #353536;
+    width: 100px;
     position: absolute;
     float: right;
-    top: 15px;
-    right: 15px;
+    top: 10px;
+    right: 5px;
+    display: flex;
+    justify-content: center;
+    border-bottom-right-radius: 9px;
+    border-bottom-left-radius: 9px;
+}
+.icons > a > img, 
+.refresh {
+    cursor: pointer;
+    margin: 1px;
     width: 30px;
     height: 30px;
+    border: 2px solid transparent;
+    border-radius: 0px;
+    transition: 0.3s;
+}
+.icons > a > img:hover, 
+.refresh:hover {
+    border: 2px solid #fff;
+    border-radius: 100%;
+    transition: 0.3s;
 }
 
 .button-tab {
@@ -82,7 +94,8 @@
     text-align: center;
 }
 
-.board, .header-board {
+.board, 
+.header-board {
     width: 400px;
 }
 
@@ -184,7 +197,8 @@ article {
 .spacer {
     height: 55px;
 }
-.totalItemsLen, .itemLen {
+.totalItemsLen, 
+.itemLen {
     text-align: center;
     display: inline-block;
     background-color: rgba(46, 46, 46, 0.3);

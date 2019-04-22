@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
+import Header from './Header';
 import Board from './Board';
 import PANEL from './Panel';
+import ScrollTop from './ScrollTop';
 import Parser from 'rss-parser';
-import {getCurTime, a} from './utils';
 import './App.css';
 import './css/Responsive.css';
 import './css/PanelScrollbar.css';
-import arrow from './arrow-up.png';
 
 class App extends Component {
     constructor(props) {
@@ -17,8 +17,6 @@ class App extends Component {
             totalItemsLen: 0,
             currentTab: 'DEV',
             tabState: Object.keys(PANEL).map(key => PANEL[key].state),
-            time: getCurTime(),
-            isScrolled: false,
         };
         this.boardRef = React.createRef();
     }
@@ -73,10 +71,6 @@ class App extends Component {
         }
     }
 
-    updateTime() {
-        setInterval(() => this.setState({time : getCurTime()}), 500);
-    }
-
     toggleClick = (id, title) => {
         let sliced = this.state.tabState.slice();
 
@@ -95,55 +89,28 @@ class App extends Component {
  
     }
 
-    upPageClick() {
-        window.scroll({top: 0, left: 0, behavior: 'smooth'});
-        return this.setState({isScrolled: false});
-    }
-
     clearSession = () => {
         sessionStorage.clear();
         this.fetchData();
     }
 
-    header = (title, slogan, time) => (
-        <header className="header-app">
-            <div className="prez">
-                <h1>{title}</h1>
-                <p className="slogan">{slogan}</p>
-            </div>
-            <p className="current-time">{time}</p>
-            <div className="refresh" title="Clear session" onClick={this.clearSession}>⟳</div>
-            <a href='https://github.com/mberger75' title='Check my Github!' target={a.b} rel={a.r}>
-                <img src="https://bit.ly/2IuMMdr" alt="Github" />
-            </a>
-        </header>
-    )
-
-    handleScroll = () => {
-        window.onscroll = () => {
-            if (window.pageYOffset >= this.boardRef.current.offsetTop) {
-                return this.setState({isScrolled: true});
-            }
-            return this.setState({isScrolled: false});
-        };
-    }
-
     componentDidMount() {
         this.fetchData();
-        this.updateTime();
-        window.addEventListener('scroll', this.handleScroll);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('scroll', this.handleScroll);
     }
 
     render() {
-        const {isLoaded, datas, totalItemsLen, currentTab, tabState, time} = this.state;
+        const {
+            isLoaded, 
+            datas, 
+            totalItemsLen, 
+            currentTab, 
+            tabState, 
+        } = this.state;
     
         return (
             <div className="App">
-                {this.header('RSSFlex', 'Simple dashboard', time)}
+                <Header title='RSSFlex' slogan='Simple dashboard' clearSession={this.clearSession}/>
+
                 <div className="button-tab">
                 {Object.keys(PANEL).map((key, id) => (
                     <button key={id} className={`btn ${tabState[id]}`} onClick={() => this.toggleClick(id, key)}>
@@ -156,10 +123,7 @@ class App extends Component {
                     {!isLoaded ? <h1 className="loading">{`Loading ${currentTab} RSS feeds...`}</h1>
                     : datas.map((el, id) => <Board key={id} id={id} feed={el}/>)}
                 </div>
-                {this.state.isScrolled &&
-                <div className="btn-top" onClick={() => this.upPageClick()}>
-                    <img src={arrow} title="Top" alt="Top"/>
-                </div>}
+                <ScrollTop boardRef={this.boardRef}/>
             </div>
         )
     }
