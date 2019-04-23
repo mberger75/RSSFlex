@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Parser from 'rss-parser';
 import {__PANEL} from './Panel';
+import Utils from './Utils';
 
 import Header from './Header';
 import Board from './Board';
@@ -48,12 +49,11 @@ class App extends Component {
     fetchData() {
         let datasParsed = [];
         let parser = new Parser();
-        const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
         let flux = __PANEL[this.state.currentTab].flux;
 
         if(!this.checkSessionStorage()) {
             Promise.all(flux.map(url => {
-                return parser.parseURL(CORS_PROXY + url, (err, feed) => {
+                return parser.parseURL(Utils.cors(url), (err, feed) => {
                     if (err) return;
                     
                     datasParsed.push(feed);
@@ -62,7 +62,7 @@ class App extends Component {
                         datas: datasParsed,
                         isLoaded: true,
                         totalItemsLen: this.getTotalItemsLen(datasParsed)
-                    }, 
+                    },
                         sessionStorage.setItem(
                             this.state.currentTab, 
                             JSON.stringify(datasParsed)
