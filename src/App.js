@@ -122,7 +122,10 @@ class App extends Component {
                 ))}
                 </div>
                 <div className={`board-container ${currentTab}`} ref={this.boardContainerRef}>
-                    <div className="totalItemsLen">{`${totalItemsLen} articles`}</div>
+                    <div className="boardContainerTitle">
+                        <h2>{currentTab}</h2>
+                        <span>{`${totalItemsLen} articles`}</span>
+                    </div>
                     {!isLoaded ? <h1 className="loading">{`Loading ${currentTab} RSS feeds...`}</h1>
                     : datas.map((el, id) => <Board key={id} id={id} feed={el}/>)}
                 </div>

@@ -89,7 +89,7 @@
     padding: 30px 20px 0px 20px;
     background-color: #C9C9C9;
 }
-.totalItemsLen {
+.boardContainerTitle {
     width: 100%;
     color: #fff;
     font-size: 25px;
@@ -97,6 +97,9 @@
     text-align: center;
     margin-bottom: 30px;
     padding: 3px 5px 3px 3px;
+}
+.boardContainerTitle > h2 {
+    margin: 5px;
 }
 
 .loading {
