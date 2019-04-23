@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "RSSFlex",
+  "name": "RSSFlex - Simple dashboard",
   "icons": [
     {
       "src": "favicon.png",

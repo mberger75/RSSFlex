@@ -12,6 +12,8 @@
     align-items: center;
 }
 .prez {
+    user-select: none;
+    cursor: pointer;
     position: absolute;
     float: left;
 }

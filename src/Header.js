@@ -21,6 +21,12 @@ class Header extends Component {
         }, 500);
     }
 
+    changeTheme() {
+        let color = `#${((1<<24) * Math.random() | 0).toString(16)}`;
+
+        return document.body.style = `background-color: ${color}`;
+    }
+
     updateWindowDimensions() {
         this.setState({
             viewWidth: window.innerWidth, 
@@ -44,7 +50,7 @@ class Header extends Component {
 
         return (
             <header className="header-app">
-                <div className="prez">
+                <div className="prez" title="🎲" onClick={() => this.changeTheme()}>
                     <h1>{title}</h1>
                     <p className="slogan">{slogan}</p>
                 </div>
