@@ -4,16 +4,19 @@ export default class Utils {
         return 'https://cors-anywhere.herokuapp.com/' + url;
     }
 
-    static convertDate(pubDate) {
-        return 'Le ' + new Date(pubDate)
-            .toLocaleString('fr-FR', {timeZone: 'Europe/Paris'});
-    }
-    
     static getSrcImg(name, ext) {
         return require(`./img/${name}.${ext}`);
     }
-    
-    static getCurTime(long) {
+}
+
+export class Time {
+
+    static beautify(pubDate) {
+        return 'Le ' + new Date(pubDate)
+            .toLocaleString('fr-FR', {timeZone: 'Europe/Paris'});
+    }
+
+    static now(long) {
         let optLong = {
             timeZone: 'Europe/Paris',
             weekday: 'long',

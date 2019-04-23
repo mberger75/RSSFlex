@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import Utils from './Utils';
+import Utils, {Time} from './Utils';
 
 class Header extends Component {
     constructor() {
         super();
         this.state = {
-            time: Utils.getCurTime('long'),
+            time: Time.now('long'),
             viewWidth: 0,
             viewHeight: 0,
         }
@@ -14,10 +14,12 @@ class Header extends Component {
 
     updateTime() {
         setInterval(() => {
-            this.state.viewWidth > 700 ?
-            this.setState({time : Utils.getCurTime('long')})
-            :
-            this.setState({time : Utils.getCurTime('short')})
+            if (this.state.viewWidth > 700) {
+                return this.setState({time : Time.now('long')})
+            }
+            else {
+                return this.setState({time : Time.now('short')})
+            }
         }, 500);
     }
 
@@ -26,6 +28,23 @@ class Header extends Component {
         let color = colors[Math.floor(Math.random() * colors.length)]
 
         return document.body.style = `background-color: ${color}`;
+    }
+
+    getIcon(conf) {
+        let title = conf.name.charAt(0).toUpperCase() + conf.name.slice(1);
+    
+        return (
+            <a 
+                href={conf.href}
+                title={title}
+                target="_blank" rel="noopener noreferrer"
+            >
+                <img 
+                    src={Utils.getSrcImg(conf.name, 'png')} 
+                    alt={title}
+                />
+            </a>
+        )
     }
 
     updateWindowDimensions() {
@@ -57,20 +76,8 @@ class Header extends Component {
                 </div>
                 <div className="current-time">{time}</div>
                 <div className="icons">
-                    <a 
-                        href='https://twitter.com/Evodfeaea' 
-                        title='Check my Twitter!' 
-                        target="_blank" rel="noopener noreferrer"
-                    >
-                        <img src={Utils.getSrcImg('twitter', 'png')} alt="Twitter" />
-                    </a>
-                    <a 
-                        href='https://github.com/mberger75' 
-                        title='Check my Github!' 
-                        target="_blank" rel="noopener noreferrer"
-                    >
-                        <img src={Utils.getSrcImg('github', 'png')} alt="Github" />
-                    </a>
+                    {this.getIcon({name: 'twitter', href: 'https://twitter.com/Evodfeaea'})}
+                    {this.getIcon({name: 'github', href: 'https://github.com/mberger75'})}
                     <img 
                         className="refresh" 
                         title="Clear session" 

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Utils from './Utils';
+import {Time} from './Utils';
 import './App.css';
 
 class Board extends Component {
@@ -58,7 +58,7 @@ class Board extends Component {
                 <a className="content-main" href={item.link} title={item.link} target="_blank" rel="noopener noreferrer">
                     <p className="title">{item.title}</p>
                     <p className="categorie">{this.getFirstCategory(item.categories)}</p>
-                    <p className="date">{item.pubDate ? Utils.convertDate(item.pubDate) : 'Unknown date'}</p>
+                    <p className="date">{item.pubDate ? Time.beautify(item.pubDate) : 'Unknown date'}</p>
                     <p className="description" dangerouslySetInnerHTML={
                         {__html: this.cleanXml(item.content)}
                     }/>
