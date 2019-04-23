@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import {getCurTime, getSrcImg, a} from './Utils';
+import Utils from './Utils';
 
 class Header extends Component {
     constructor() {
         super();
         this.state = {
-            time: getCurTime('long'),
+            time: Utils.getCurTime('long'),
             viewWidth: 0,
             viewHeight: 0,
         }
@@ -15,9 +15,9 @@ class Header extends Component {
     updateTime() {
         setInterval(() => {
             this.state.viewWidth > 700 ?
-            this.setState({time : getCurTime('long')})
+            this.setState({time : Utils.getCurTime('long')})
             :
-            this.setState({time : getCurTime('short')})
+            this.setState({time : Utils.getCurTime('short')})
         }, 500);
     }
 
@@ -53,21 +53,21 @@ class Header extends Component {
                     <a 
                         href='https://twitter.com/Evodfeaea' 
                         title='Check my Twitter!' 
-                        target={a.b} rel={a.r}
+                        target="_blank" rel="noopener noreferrer"
                     >
-                        <img src={getSrcImg('twitter', 'png')} alt="Twitter" />
+                        <img src={Utils.getSrcImg('twitter', 'png')} alt="Twitter" />
                     </a>
                     <a 
                         href='https://github.com/mberger75' 
                         title='Check my Github!' 
-                        target={a.b} rel={a.r}
+                        target="_blank" rel="noopener noreferrer"
                     >
-                        <img src={getSrcImg('github', 'png')} alt="Github" />
+                        <img src={Utils.getSrcImg('github', 'png')} alt="Github" />
                     </a>
                     <img 
                         className="refresh" 
                         title="Clear session" 
-                        src={getSrcImg('refresh', 'png')} 
+                        src={Utils.getSrcImg('refresh', 'png')} 
                         onClick={clearSession}
                         alt="Clear session"
                     />

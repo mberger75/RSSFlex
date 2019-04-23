@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {a, convertDate} from './Utils';
+import Utils from './Utils';
 import './App.css';
 
 class Board extends Component {
@@ -55,10 +55,10 @@ class Board extends Component {
     generateItem = item => (
         <article key={item.link} className="article" onClick={(e) => this.itemSeen(e)}>
             <div className="content">
-                <a className="content-main" href={item.link} title={item.link} target={a.b} rel={a.r}>
+                <a className="content-main" href={item.link} title={item.link} target="_blank" rel="noopener noreferrer">
                     <p className="title">{item.title}</p>
                     <p className="categorie">{this.getFirstCategory(item.categories)}</p>
-                    <p className="date">{item.pubDate ? convertDate(item.pubDate) : 'Unknown date'}</p>
+                    <p className="date">{item.pubDate ? Utils.convertDate(item.pubDate) : 'Unknown date'}</p>
                     <p className="description" dangerouslySetInnerHTML={
                         {__html: this.cleanXml(item.content)}
                     }/>
@@ -94,7 +94,7 @@ class Board extends Component {
             <div className={`board ${boardClass}`}>
                 <header className="header-board">
                     <img className="icon" src={this.getIcon(feed.link)} alt="Icon"/>
-                    <a className="boardTitle" href={feed.link} title={feed.link} target={a.b} rel={a.r}>
+                    <a className="boardTitle" href={feed.link} title={feed.link} target="_blank" rel="noopener noreferrer">
                         {this.getCleanTitle(feed.link, feed.title)}
                     </a>
                     <div className="itemLen">
