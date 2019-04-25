@@ -76,6 +76,7 @@ class Header extends Component {
                 </div>
                 <div className="current-time">{time}</div>
                 <div className="icons">
+                    {this.getIcon({name: 'website', href: 'https://bergermarc.com'})}
                     {this.getIcon({name: 'twitter', href: 'https://twitter.com/Evodfeaea'})}
                     {this.getIcon({name: 'github', href: 'https://github.com/mberger75'})}
                     <img 
