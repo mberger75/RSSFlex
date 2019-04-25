@@ -1,12 +1,15 @@
+// Modules
 import React, {Component} from 'react';
 import Parser from 'rss-parser';
-import {__PANEL} from './Panel';
+import __PANEL from './Panel';
 import Utils from './Utils';
 
+// Components
 import Header from './Header';
 import Board from './Board';
 import ScrollTop from './ScrollTop';
 
+// Stylesheet
 import './App.css';
 import './css/Responsive.css';
 import './css/PanelScrollbar.css';
