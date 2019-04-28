@@ -24,7 +24,7 @@ class Header extends Component {
     }
 
     changeTheme() {
-        let colors = ['#02ad02', '#8282ee', '#3fe5e5', '#8b0000', '#002900', '#290000'];
+        let colors = ['#02ad02', '#8282ee', '#3fe5e5', '#8b0000', '#002900', '#ff69b4'];
         let color = colors[Math.floor(Math.random() * colors.length)]
 
         return document.body.style = `background-color: ${color}`;
