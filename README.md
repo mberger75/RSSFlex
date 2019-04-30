@@ -10,8 +10,8 @@
 
 ## Screenshot
 <p style="text-align:center;">
-<img src="https://image.noelshack.com/fichiers/2019/18/2/1556645736-iphone.jpg" alt="Iphone" width="200"/>
-<img src="https://image.noelshack.com/fichiers/2019/18/2/1556645827-ipad.jpg" alt="Ipad" width="200" />
+<img src="https://image.noelshack.com/fichiers/2019/18/2/1556645736-iphone.jpg" alt="Iphone" width="500"/>
+<img src="https://image.noelshack.com/fichiers/2019/18/2/1556645827-ipad.jpg" alt="Ipad" width="500" />
 </p>
 
 ## Features
