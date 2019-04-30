@@ -12,8 +12,8 @@
 
 ## Screenshots
 <p align="center">
-<img src="https://image.noelshack.com/fichiers/2019/18/2/1556645827-ipad.jpg" alt="Ipad" width="700" />
-<img src="https://image.noelshack.com/fichiers/2019/18/2/1556645736-iphone.jpg" alt="Iphone" width="400"/>
+<img src="https://image.noelshack.com/fichiers/2019/18/2/1556645827-ipad.jpg" alt="Ipad" width="900" />
+<img src="https://image.noelshack.com/fichiers/2019/18/2/1556645736-iphone.jpg" alt="Iphone" width="500"/>
 </p>
 
 ## Features
