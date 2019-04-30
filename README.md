@@ -1,7 +1,7 @@
 
 
 <p class="text-align:center">
-<img src="https://rssflex.netlify.com/favicon.png" alt="logo" title="logo" />
+<img src="https://image.noelshack.com/fichiers/2019/18/2/1556645015-logo-readme.jpg" alt="logo" title="logo" />
 </a>
 
 # [RSSFlex](https://rssflex.netlify.com) — All RSS feeds in one simple dashboard
