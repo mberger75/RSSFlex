@@ -113,7 +113,7 @@ class App extends Component {
     
         return (
             <div className="App">
-                <Header title='RSSFlex' slogan='Simple dashboard' clearSession={this.clearSession}/>
+                <Header clearSession={this.clearSession}/>
 
                 <div className="button-tab">
                 {Object.keys(__PANEL).map((key, id) => (

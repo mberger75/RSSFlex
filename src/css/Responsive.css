@@ -35,9 +35,19 @@
         position: relative;
         float: none;
     }
+    .Website, .Github, .Twitter, .refresh {
+        margin-top: 5px;
+    }
+    .prez {
+        display: block;
+    }
+    .current-time {
+        margin: 5px;
+    }
     .icons {
         margin: 0 auto;
         right: 0;
+        top: 0;
     }
     .board {
         height: 30px;

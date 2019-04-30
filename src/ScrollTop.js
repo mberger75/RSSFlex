@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Utils from './Utils';
 
 class ScrollTop extends Component {
     constructor(props) {
@@ -35,7 +34,7 @@ class ScrollTop extends Component {
         return (
             this.state.isScrolled &&
             <div className="btn-top" onClick={() => this.upPageClick()}>
-                <img src={Utils.getSrcImg('arrow-up', 'png')} title="Top" alt="Top"/>
+                <span className="sprite" title="Top" alt="Top"></span>
             </div>
         )
     }

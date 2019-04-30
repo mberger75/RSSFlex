@@ -3,7 +3,7 @@
 }
 
 .App > .header-app {
-    height: 60px;
+    height: 50px;
     background-color: #353536;
     color: #fff;
     padding: 10px;
@@ -16,16 +16,49 @@
     cursor: pointer;
     position: absolute;
     float: left;
-}
-.prez > h1, 
-.slogan {
-    margin: 0px;
+    display: flex;
+    align-items: center;
 }
 .prez > h1 {
-    font-size: 23px;
+    font-family: Consolas, monaco, monospace;
+    font-weight: normal;
+    font-size: 15px;
+    margin: 5px;
 }
-.slogan {
-    font-style: italic;
+
+.sprite {
+    width: 30px;
+    height: 30px;
+    display: block;
+    background-repeat: no-repeat;
+}
+
+.logo {
+    display: inline-block;
+    background: url(./img/spritesheet.png) 0 0;
+}
+.btn-top {
+    cursor: pointer;
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    opacity: .3;
+    bottom: 5px;
+    right: 5px;
+    transition: 0.3s;
+}
+.btn-top > .sprite {
+    background: url(./img/spritesheet.png) 29.5px 1px;
+}
+.btn-top:hover {
+    opacity: 1;
+    transition: 0.3s;
+}
+
+.btn-top-off {
+    display: none;
 }
 .current-time {
     margin-top: 10px;
@@ -34,6 +67,7 @@
 .icons {
     background-color: #353536;
     width: 135px;
+    height: 40px;
     position: absolute;
     float: right;
     top: 10px;
@@ -43,19 +77,18 @@
     border-bottom-right-radius: 9px;
     border-bottom-left-radius: 9px;
 }
-.icons img {
-    cursor: pointer;
-    margin: 1px;
-    width: 30px;
-    height: 30px;
-    border: 2px dotted transparent;
-    border-radius: 0;
-    transition: 0.5s;
+.icons .Website {
+    background: url(./img/spritesheet.png) -30px 0px;
 }
-.icons img:hover {
-    border: 1px solid rgb(139, 139, 139);
-    border-radius: 100%;
-    transition: 0.3s;
+.icons .Github {
+    background: url(./img/spritesheet.png) -60px 0px;
+}
+.icons .Twitter {
+    background: url(./img/spritesheet.png) -90px 0px;
+}
+.icons .refresh {
+    cursor: pointer;
+    background: url(./img/spritesheet.png) -120px 0px;
 }
 
 .button-tab {
@@ -225,30 +258,4 @@
     font-size: 13px;
     font-weight: bold;
     border-radius: 3px;
-}
-
-.btn-top {
-    cursor: pointer;
-    position: fixed;
-    width: 30px;
-    height: 30px;
-    padding: 3px;
-    text-align: center;
-    background-color: rgb(255, 255, 255);
-    opacity: .3;
-    bottom: 5px;
-    right: 5px;
-    transition: 0.3s;
-}
-.btn-top:hover {
-    opacity: 1;
-    transition: 0.3s;
-}
-.btn-top > img {
-    width: 25px;
-    height: 25px;
-    padding: 3px;
-}
-.btn-top-off {
-    display: none;
 }
