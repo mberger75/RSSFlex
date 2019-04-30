@@ -9,8 +9,8 @@
 **A simple RSS feed reader
 
 ## Screenshot
-![](https://image.noelshack.com/fichiers/2019/18/2/1556645736-iphone.jpg)
-![](https://image.noelshack.com/fichiers/2019/18/2/1556645827-ipad.jpg)
+<img src="https://image.noelshack.com/fichiers/2019/18/2/1556645736-iphone.jpg" alt="Iphone" width="200"/>
+<img src="https://image.noelshack.com/fichiers/2019/18/2/1556645827-ipad.jpg" alt="Ipad" width="200" />
 
 ## Features
 forthcoming
