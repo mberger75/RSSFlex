@@ -1,4 +1,4 @@
-<p style="text-align:center;">
+<p align="center">
 <img src="https://image.noelshack.com/fichiers/2019/18/2/1556645015-logo-readme.jpg" alt="logo" title="logo" />
 </p>
 
@@ -9,9 +9,9 @@
 **A simple RSS feed reader
 
 ## Screenshot
-<p style="text-align:center;">
-<img src="https://image.noelshack.com/fichiers/2019/18/2/1556645736-iphone.jpg" alt="Iphone" width="500"/>
-<img src="https://image.noelshack.com/fichiers/2019/18/2/1556645827-ipad.jpg" alt="Ipad" width="500" />
+<p align="center">
+<img src="https://image.noelshack.com/fichiers/2019/18/2/1556645827-ipad.jpg" alt="Ipad" width="700" />
+<img src="https://image.noelshack.com/fichiers/2019/18/2/1556645736-iphone.jpg" alt="Iphone" width="400"/>
 </p>
 
 ## Features
