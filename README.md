@@ -1,5 +1,3 @@
-
-
 <p class="text-align:center">
 <img src="https://image.noelshack.com/fichiers/2019/18/2/1556645015-logo-readme.jpg" alt="logo" title="logo" />
 </a>
@@ -11,12 +9,15 @@
 **A simple RSS feed reader
 
 ## Screenshot
-forthcoming
+![](https://image.noelshack.com/fichiers/2019/18/2/1556645736-iphone.jpg)
+![](https://image.noelshack.com/fichiers/2019/18/2/1556645827-ipad.jpg)
 
 ## Features
 forthcoming
 
 ## TODO
 - Connect database (mongoose)
+- Possibility to create an account
+- Customize RSS feeds
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
