@@ -1,6 +1,6 @@
-<p class="text-align:center">
+<p style="text-align:center;">
 <img src="https://image.noelshack.com/fichiers/2019/18/2/1556645015-logo-readme.jpg" alt="logo" title="logo" />
-</a>
+</p>
 
 # [RSSFlex](https://rssflex.netlify.com) — All RSS feeds in one simple dashboard
 
@@ -9,8 +9,10 @@
 **A simple RSS feed reader
 
 ## Screenshot
+<p style="text-align:center;">
 <img src="https://image.noelshack.com/fichiers/2019/18/2/1556645736-iphone.jpg" alt="Iphone" width="200"/>
 <img src="https://image.noelshack.com/fichiers/2019/18/2/1556645827-ipad.jpg" alt="Ipad" width="200" />
+</p>
 
 ## Features
 forthcoming
