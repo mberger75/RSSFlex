@@ -7,7 +7,8 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/edfb2794-7483-445a-8454-0509efc7d580/deploy-status)](https://app.netlify.com/sites/rssflex/deploys)
 
 **A simple RSS feed reader.**
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+<p>This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).</p>
 
 ## Screenshots
 <p align="center">
