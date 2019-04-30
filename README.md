@@ -8,7 +8,7 @@
 
 **A simple RSS feed reader.**
 
-<p>This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).</p>
+<p>This project was bootstrapped with <a href="https://github.com/facebook/create-react-app">Create React App</a>.</p>
 
 ## Screenshots
 <p align="center">
