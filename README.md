@@ -1,22 +1,22 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 
 <p class="text-align:center">
-<img src="" alt="logo" title="logo" />
+<img src="https://rssflex.netlify.com/favicon.png" alt="logo" title="logo" />
 </a>
 
-# RSSFlex —— All feeds in one dashboard
+# [RSSFlex](https://rssflex.netlify.com) — All RSS feeds in one simple dashboard
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/edfb2794-7483-445a-8454-0509efc7d580/deploy-status)](https://app.netlify.com/sites/rssflex/deploys)
 
 **A simple RSS feed reader
 
 ## Screenshot
-...
+forthcoming
 
 ## Features
-...
+forthcoming
 
 ## TODO
-...
+- Connect database (mongoose)
 
-=> [https://rssflex.netlify.com](https://rssflex.netlify.com)
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
