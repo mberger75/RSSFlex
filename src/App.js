@@ -59,7 +59,15 @@ class App extends Component {
                 return parser.parseURL(Utils.cors(url), (err, feed) => {
                     if (err) return;
                     
-                    datasParsed.push(feed);
+                    let result = {
+                        description: feed.description,
+                        image: feed.image,
+                        items: feed.items.slice(0, 5),
+                        link: feed.link,
+                        title: feed.title
+                    };
+
+                    datasParsed.push(result);
 
                     return this.setState({
                         datas: datasParsed,

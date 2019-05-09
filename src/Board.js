@@ -41,7 +41,9 @@ class Board extends Component {
         const regex = /\.(com|net|org|fr|blog|info)\/?$/i;
         const url = regex.test(link.split('/')[2]) ? link.split('/')[2] : 'rss.com';
 
-        return `https://api.faviconkit.com/${url}/${size}`;
+        let icon = `https://api.faviconkit.com/${url}/${size}`;
+        
+        return icon;
     }
 
     itemSeen(e) {

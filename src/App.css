@@ -30,7 +30,6 @@
     width: 30px;
     height: 30px;
     display: block;
-    background-repeat: no-repeat;
 }
 
 .logo {
@@ -50,7 +49,9 @@
     transition: 0.3s;
 }
 .btn-top > .sprite {
-    background: url(./img/spritesheet.png) 29.5px 1px;
+    background: url(./img/spritesheet.png);
+    background-position: 29px 1px;
+    transform: scale(.7);
 }
 .btn-top:hover {
     opacity: 1;
