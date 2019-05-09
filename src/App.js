@@ -53,6 +53,7 @@ class App extends Component {
         let datasParsed = [];
         let parser = new Parser();
         let flux = __PANEL[this.state.currentTab].flux;
+        let articleByFeed = 5;
 
         if(!this.checkSessionStorage()) {
             Promise.all(flux.map(url => {
@@ -61,10 +62,10 @@ class App extends Component {
                     
                     let result = {
                         description: feed.description,
-                        image: feed.image,
-                        items: feed.items.slice(0, 5),
+                        image: feed.image ? feed.image.url : 'https://cdn2.iconfinder.com/data/icons/social-icon-3/512/social_style_3_rss-512.png',
+                        items: feed.items.slice(0, articleByFeed),
                         link: feed.link,
-                        title: feed.title
+                        title: feed.title,
                     };
 
                     datasParsed.push(result);

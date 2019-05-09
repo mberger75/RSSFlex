@@ -14,7 +14,8 @@ class Board extends Component {
 
     cleanXml = (raw) => {
         const description = String(raw);
-        const def = 'No description';
+        const def = false;
+
         const shorten = str => str.substring(0, 140) + '...';
         const cleanXml = description.replace(/<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/g, '');
 
@@ -26,24 +27,11 @@ class Board extends Component {
 
     getCleanTitle(link, title) {
         const regex = /\.(com|net|org|fr|blog|info)\/?$/i;
-
         return regex.test(link.split('/')[2]) ? link.split('/')[2] : title
     }
 
     getFirstCategory(categories) {
-        let def = 'No category';
-
-        return categories && typeof categories[0] === 'string'? String(categories[0]) : def;
-    }
-
-    getIcon(link) {
-        const size = 144;
-        const regex = /\.(com|net|org|fr|blog|info)\/?$/i;
-        const url = regex.test(link.split('/')[2]) ? link.split('/')[2] : 'rss.com';
-
-        let icon = `https://api.faviconkit.com/${url}/${size}`;
-        
-        return icon;
+        return categories && typeof categories[0] === 'string'? String(categories[0]) : false;
     }
 
     itemSeen(e) {
@@ -59,11 +47,15 @@ class Board extends Component {
             <div className="content">
                 <a className="content-main" href={item.link} title={item.link} target="_blank" rel="noopener noreferrer">
                     <p className="title">{item.title}</p>
-                    <p className="categorie">{this.getFirstCategory(item.categories)}</p>
-                    <p className="date">{item.pubDate ? Time.beautify(item.pubDate) : 'Unknown date'}</p>
-                    <p className="description" dangerouslySetInnerHTML={
+                    {this.getFirstCategory(item.categories) &&
+                    <p className="categorie">
+                        {this.getFirstCategory(item.categories)}
+                    </p>}
+                    {item.pubDate && <p className="date">{Time.beautify(item.pubDate)}</p>}
+                    {this.cleanXml(item.content) && 
+                        <p className="description" dangerouslySetInnerHTML={
                         {__html: this.cleanXml(item.content)}
-                    }/>
+                    }/>}
                     <hr/>
                 </a>
             </div>
@@ -95,7 +87,7 @@ class Board extends Component {
         return (
             <div className={`board ${boardClass}`}>
                 <header className="header-board">
-                    <img className="icon" src={this.getIcon(feed.link)} alt="Icon"/>
+                    <img className="icon" src={feed.image} alt="Icon"/>
                     <a className="boardTitle" href={feed.link} title={feed.link} target="_blank" rel="noopener noreferrer">
                         {this.getCleanTitle(feed.link, feed.title)}
                     </a>

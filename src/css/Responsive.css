@@ -12,16 +12,17 @@
     }
     .button-tab > .btn {
         display: inline-block;
-        width: 40px;
-        padding: 9px;
+        width: 70px;
+        padding: 7px;
         margin: 0 auto;
-        margin-right: 5px;
+        margin-right: 3px;
     }
     .btn .tab-emoji {
         margin-right: 0;
     }
     .btn .tab-name {
-        display: none;
+        font-size: 9px;
+        display: block;
     }
 
     .header-app {

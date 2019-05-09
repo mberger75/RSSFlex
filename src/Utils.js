@@ -8,8 +8,13 @@ export default class Utils {
 export class Time {
 
     static beautify(pubDate) {
-        return 'Le ' + new Date(pubDate)
-            .toLocaleString('fr-FR', {timeZone: 'Europe/Paris'});
+        if (String(new Date(pubDate)) !== 'Invalid Date') {
+            return 'Le ' + new Date(pubDate)
+                .toLocaleString('fr-FR', {timeZone: 'Europe/Paris'});
+        }
+        else {
+            return false;
+        }
     }
 
     static now() {
