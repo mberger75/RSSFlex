@@ -14,7 +14,7 @@
 
 <p align="center">
 <img src="https://image.noelshack.com/fichiers/2019/18/2/1556653504-browser-mockup.png" alt="Browser"/>
-<img src="https://image.noelshack.com/fichiers/2019/18/2/1556645827-ipad.jpg" alt="Ipad" width="900"/>
+<!-- <img src="https://image.noelshack.com/fichiers/2019/18/2/1556645827-ipad.jpg" alt="Ipad" width="900"/> -->
 <img src="https://image.noelshack.com/fichiers/2019/18/2/1556645736-iphone.jpg" alt="Iphone" width="400"/>
 </p>
 
