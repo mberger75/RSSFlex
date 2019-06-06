@@ -62,7 +62,7 @@ class Header extends Component {
                 <div className="current-time">{time}</div>
                 <div className="icons">
                     {this.icon({title: 'Website', href: 'https://bergermarc.com'})}
-                    {this.icon({title: 'Twitter', href: 'https://twitter.com/Evodfeaea'})}
+                    {this.icon({title: 'Twitter', href: 'https://twitter.com/marcbrgr'})}
                     {this.icon({title: 'Github', href: 'https://github.com/mberger75'})}
                     <span 
                         className="sprite refresh" 
