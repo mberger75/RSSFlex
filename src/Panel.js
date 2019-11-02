@@ -39,7 +39,7 @@ const __PANEL = {
         'emoji': '🔌',
         'flux': [
             'https://www.dealabs.com/rssx/keyword-alarm/UPAjL9ODne8YxbeWT_PUINfEbDxBAjO_aANHI4Ytghg.',
-            'https://www.tomshardware.com/feeds/rss2/all.xml',
+            'https://www.tomshardware.com/feeds/all',
             'https://www.pcmag.com/Rss.aspx/SectionArticles?sectionId=1565',
             'https://www.pcmag.com/Rss.aspx/SectionArticles?sectionId=1564'
         ]

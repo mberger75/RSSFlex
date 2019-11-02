@@ -1,0 +1,79 @@
+.header-app {
+    height: 50px;
+    background-color: var(--main-dark);
+    color: #fff;
+    padding: 10px;
+    margin: 0px 0px 30px 0px;
+    position: relative;
+    align-items: center;
+}
+.prez {
+    user-select: none;
+    cursor: pointer;
+    position: absolute;
+    float: left;
+    display: flex;
+    align-items: center;
+}
+.prez > h1 {
+    font-family: Consolas, monaco, monospace;
+    font-weight: normal;
+    font-size: 15px;
+    margin: 5px;
+}
+
+.sprite {
+    width: 30px;
+    height: 30px;
+}
+
+.logo {
+    display: inline-block;
+}
+
+.current-time {
+    margin-top: 10px;
+    text-align: center;
+}
+.nav {
+    float: right;
+    position: absolute;
+    width: 135px;
+    height: 35px;
+    top: 10px;
+    right: 5px;
+    display: flex;
+    justify-content: center;
+    border-bottom-right-radius: 9px;
+    border-bottom-left-radius: 9px;
+    background-color: var(--main-dark);
+}
+.nav span {
+    cursor: pointer;
+    font-size: 17px;
+}
+
+.button-tab {
+    background: transparent;
+    margin-left: 10px;
+}
+.button-tab > .btn {
+    border: 1px solid #000;
+    border-bottom: none;
+    outline: none;
+    padding: 7px 7px 10px 7px;
+    margin-right: 5px;
+    background: #fff;
+}
+.button-tab > .btn:hover {
+    cursor: pointer;
+}
+.btn .tab-emoji {
+    margin-right: 5px;
+}
+.button-tab .active {
+    padding: 7px 8px 10px 8px;
+    font-weight: bold;
+    background-color: var(--main-dark);
+    color: #fff;
+}

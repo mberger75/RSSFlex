@@ -34,7 +34,7 @@ class ScrollTop extends Component {
         return (
             this.state.isScrolled &&
             <div className="btn-top" onClick={() => this.upPageClick()}>
-                <span className="sprite" title="Top" alt="Top"></span>
+                <span role="img" aria-label="Emoji Top">🔝</span>
             </div>
         )
     }

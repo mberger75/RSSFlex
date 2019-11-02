@@ -1,0 +1,132 @@
+.board-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+    padding: 30px 20px 0px 20px;
+    border-top: 1px solid #000;
+}
+.boardContainerTitle {
+    width: 100%;
+    color: var(--main-dark);
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 3px 5px 3px 3px;
+}
+.boardContainerTitle > h2 {
+    margin: 5px;
+}
+.board, .header-board {
+    width: 400px;
+}
+.board {
+    margin: 0 1% 20px;
+    margin-bottom: 20px;
+    height: 450px;
+    overflow-y: overlay;
+    overflow-x: hidden;
+    box-shadow: inset 0px -30px 30px -20px rgba(0, 35, 82, 0.3);
+}
+.header-board {
+    position: absolute;
+    background-color: var(--main-dark);
+    padding: 10px;
+    margin: 0px;
+    z-index: 999;
+}
+.icon {
+    float: left;
+    margin-right: 10px;
+    width: 17px;
+    height: 17px;
+}
+.boardTitle {
+    text-decoration: none;
+    font-weight: bold;
+    color: #fff;
+    font-size: 13px;
+    margin: 0;
+}
+.boardTitle:hover {
+    text-decoration: underline;
+}
+.seemore {
+    display: none;
+    float: right;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 5px;
+}
+.itemLen {
+    float: right;
+    width: 25px;
+    padding: 3px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: bold;
+    color: #fff;
+    border: 1px solid #fff;
+}
+.article {
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+.article:nth-child(1){
+    margin-top: 45px;
+}
+.content {
+    padding: 10px 10px 0px 10px;
+}
+
+.content:hover {
+    background-color: rgba(198, 216, 218, 0.2);
+}
+.content-main {
+    color: #000;
+    text-decoration: none;
+}
+.article-seen {
+    opacity: 0.5;
+}
+.article-seen::before{
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    content: "✔️";
+}
+.content-main > hr {
+    padding: 0;
+    margin: 0;
+    height: .5px;
+    border-color: rgba(99, 99, 99, 0.1);
+}
+.title {
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--main-dark);
+}
+.categorie {
+    font-style: italic;
+    font-size: 13px;
+}
+.date {
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.7);
+}
+.thumbnail {
+    float: left;
+    width: 80px;
+    height: 60px;
+    margin: 25px 10px 0px 0px;
+}
+.description {
+    font-size: 15px;
+}
+.spacer {
+    height: 55px;
+}

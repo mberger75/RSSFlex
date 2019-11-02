@@ -49,29 +49,29 @@ class App extends Component {
     }
 
     fetchData() {
+        this.setState({ isLoaded: false });
         const { currentTab } = this.state;
-        const parser = new Parser();
-        const result = [];
-        const articleByFeed = 9;
+        const parser = new Parser({ maxRedirects: 500 });
+        const limit = arr => len => arr.length >= len ? arr.slice(0, len) : arr;
 
-        __PANEL[currentTab].flux.forEach(url => {
-            parser.parseURL(`https://cors-anywhere.herokuapp.com/${url}`, (err, feed) => {
-                if (err) return console.log(err);
+        new Promise(res => {
+            const result = [];
+
+            __PANEL[currentTab].flux.forEach(async (url, index) => {
+                const feed = await parser.parseURL(`https://cors-anywhere.herokuapp.com/${url}`);
+                const { description, image, items, link, title } = feed;
 
                 result.push({
-                    description: feed.description,
-                    image: feed.image ? feed.image.url : rssIcon,
-                    items: feed.items.slice(0, articleByFeed),
-                    link: feed.link,
-                    title: feed.title,
+                    description, link, title,
+                    image: image ? image.url : rssIcon,
+                    items: limit(items)(20),
                 });
 
-                this.setState({
-                    isLoaded: false,
-                    totalItemsLen: this.getTotalItemsLen(result)
-                });
+                this.setState({ totalItemsLen: this.getTotalItemsLen(result) });
+                if ((index + 1) >= __PANEL[currentTab].flux.length) res(result);
             });
-
+        })
+        .then(result => {
             setTimeout(() => {
                 this.setState({ datas: result, isLoaded: true },
                 sessionStorage.setItem(currentTab, JSON.stringify(result)));

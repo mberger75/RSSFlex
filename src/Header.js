@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {Time} from './Utils';
 
+import './css/Header.css';
+import logo from './img/logo.png';
+
 class Header extends Component {
     constructor() {
         super();
@@ -17,18 +20,6 @@ class Header extends Component {
             return this.setState({time : Time.now()})
         }, 500);
     }
-
-    // icon(conf) {    
-    //     return (
-    //         <a 
-    //             href={conf.href}
-    //             title={conf.title}
-    //             target="_blank" rel="noopener noreferrer"
-    //         >
-    //             <span className={"sprite " + conf.title}></span>
-    //         </a>
-    //     )
-    // }
 
     updateWindowDimensions() {
         this.setState({
@@ -55,13 +46,13 @@ class Header extends Component {
             <header className="header-app">
                 <div className="prez" title="🎲">
                     <a href="https://rssflex.netlify.com/">
-                        <span className="sprite logo"></span>
+                        <img className="sprite logo" src={logo} alt="" />
                     </a>
                     <h1 title="RSSFlex">RSSFlex</h1>
                 </div>
                 <div className="current-time">{time}</div>
-                <div className="icons">
-                    <span className="sprite refresh" title="Clear session" onClick={clearSession}>REFRESH</span>
+                <div className="nav">
+                    <span className="refresh" onClick={clearSession} role="img" aria-label="Emoji Refresh">🔄</span>
                 </div>
             </header>
         )

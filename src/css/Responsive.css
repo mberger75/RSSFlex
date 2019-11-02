@@ -1,10 +1,3 @@
-@media screen and (max-width: 900px) {
-    .board {
-        margin: 0 auto;
-        margin-bottom: 20px;
-    }
-}
-
 @media screen and (max-width: 700px) {
     .button-tab {
         text-align: center;
@@ -31,11 +24,11 @@
         height: 100px!important;
         margin-bottom: 50px!important;
     }
-    .current-time, .prez, .icons {
+    .current-time, .prez, .nav {
         position: relative;
         float: none;
     }
-    .Website, .Github, .Twitter, .refresh {
+    .refresh {
         margin-top: 5px;
     }
     .prez {
@@ -44,20 +37,24 @@
     .current-time {
         margin: 5px;
     }
-    .icons {
+    .nav {
         margin: 0 auto;
         right: 0;
         top: 0;
-        height: 35px;
     }
-    .icons span {
-        font-size: 13px;
-        height: 23px;
-        padding: 3px;
+    .board, .header-board {
+        width: 300px;
     }
     .board {
         height: 30px;
+        margin: 0 auto;
+        margin-bottom: 20px;
         transition: 0.5s;
+    }
+    .board-container {
+        display: block;
+        height: 100%;
+        padding-bottom: 30px;
     }
     .board-active {
         height: 450px;
@@ -79,32 +76,5 @@
     }
     .description {
         font-size: 13px;
-    }
-}
-
-@media screen and (max-width: 500px) {
-    .board-container {
-        display: block;
-        height: 100%;
-        padding-bottom: 30px;
-    }
-    .board, .board > .header-board {
-        width: 350px;
-    }
-}
-@media screen and (max-width: 400px) {
-    .board, .board > .header-board {
-        width: 300px;
-    }
-}
-@media screen and (max-width: 340px) {
-    .board, .board > .header-board {
-        width: 250px;
-    }
-    .header-board > .boardTitle {
-        font-size: 10px;
-    }
-    .description {
-        font-size: 11px;
     }
 }

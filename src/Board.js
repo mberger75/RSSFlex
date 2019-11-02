@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Time} from './Utils';
-import './App.css';
+
+import './css/Board.css';
 
 class Board extends Component {
 
@@ -12,26 +13,9 @@ class Board extends Component {
         }
     }
 
-    cleanXml = (raw) => {
-        const description = String(raw);
-        const def = false;
-
-        const shorten = str => str.substring(0, 140) + '...';
-        const cleanXml = description.replace(/<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/g, '');
-
-        if (description.trim().charAt(0) !== '<') {
-            return description.trim().length >= 50 ? shorten(description) : def;
-        }
-        return cleanXml.trim().length >= 50 ? shorten(cleanXml) : def;
-    }
-
     getCleanTitle(link, title) {
         const regex = /\.(com|net|org|fr|blog|info)\/?$/i;
         return regex.test(link.split('/')[2]) ? link.split('/')[2] : title
-    }
-
-    getFirstCategory(categories) {
-        return categories && typeof categories[0] === 'string'? String(categories[0]) : false;
     }
 
     itemSeen(e) {
@@ -42,42 +26,13 @@ class Board extends Component {
         }
     }
 
-    generateItem = item => (
-        <article key={item.link} className="article" onClick={(e) => this.itemSeen(e)}>
-            <div className="content">
-                <a className="content-main" href={item.link} title={item.link} target="_blank" rel="noopener noreferrer">
-                    <p className="title">{item.title}</p>
-                    {this.getFirstCategory(item.categories) &&
-                    <p className="categorie">
-                        {this.getFirstCategory(item.categories)}
-                    </p>}
-                    {item.pubDate && <p className="date">{Time.beautify(item.pubDate)}</p>}
-                    {this.cleanXml(item.content) && 
-                        <p className="description" dangerouslySetInnerHTML={
-                        {__html: this.cleanXml(item.content)}
-                    }/>}
-                    <hr/>
-                </a>
-            </div>
-        </article>
-    )
-
-    displayBoard = (e) => {
+    displayBoard = e => {
         let board = e.currentTarget.closest(".board");
         let activeClass = 'board-active';
 
-        if(!board.classList.contains(activeClass)) {
-            return this.setState({
-                boardClass: activeClass,
-                seemore: '➖'
-            });
-        }
-        else {
-            return this.setState({
-                boardClass: '',
-                seemore: '➕'
-            });
-        }
+        if(!board.classList.contains(activeClass))
+            return this.setState({ boardClass: activeClass, seemore: '➖' });
+        return this.setState({ boardClass: '', seemore: '➕' });
     }
 
     render() {
@@ -96,13 +51,43 @@ class Board extends Component {
                     </div>
                     <div className="itemLen">{feed.items.length}</div>
                 </header>
-                <div className="article-wrapper">
-                    {feed.items.map(item => this.generateItem(item))}
-                </div>
+                <div className="article-wrapper">{feed.items.map(item => generateItem(item))}</div>
                 <div className="spacer"></div>
             </div>
-        )
+        );
     }
+}
+
+const generateItem = item => {
+    const { title, categories, link, pubDate, content } = item;
+
+    const getCat = cat => (cat && typeof cat[0] === 'string') && String(cat[0]);
+    const shorten = str => str.substring(0, 140);
+    const utf8 = str => str
+        .replace(/&#8217;|&#39;/g, `'`)
+        .replace(/&eacute;|&egrave;|&ecirc;|&euml;/g, 'e')
+        .replace(/&agrave;|&acirc;/g, 'a')
+        .replace(/&ccedil;/, 'ç')
+        .replace(/&#32;/, '');
+
+    const cleanXML = xml => xml.replace(/<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/g, '')
+
+
+    const clean = txt => shorten(utf8(cleanXML(String(txt))));
+
+    return (
+        <article key={link} className="article" onClick={(e) => this.itemSeen(e)}>
+            <div className="content">
+                <a className="content-main" href={link} title={link} target="_blank" rel="noopener noreferrer">
+                    <p className="title">{title}</p>
+                    {getCat(categories) && <p className="categorie">{getCat(categories)}</p>}
+                    {pubDate && <p className="date">{Time.beautify(pubDate)}</p>}
+                    <p className="description">{clean(content)}...</p>
+                    <hr/>
+                </a>
+            </div>
+        </article>
+    );
 }
 
 export default Board;
