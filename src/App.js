@@ -50,13 +50,13 @@ class App extends React.Component {
     async fetchData() {
         this.setState({ isLoaded: false });
         const { currentTab } = this.state;
-        const parser = new Parser({ maxRedirects: 500 });
+        const parser = new Parser();
         const limit = arr => len => arr.length >= len ? arr.slice(0, len) : arr;
 
         const result = await new Promise(res => {
             const result = [];
 
-            __PANEL[currentTab].flux.forEach(async (url, index) => {
+            __PANEL[currentTab].flux.forEach(async url => {
                 const feed = await parser.parseURL(`https://cors-anywhere.herokuapp.com/${url}`);
                 const { description, image, items, link, title } = feed;
 
@@ -67,10 +67,11 @@ class App extends React.Component {
                 });
 
                 this.setState({ totalItemsLen: this.getTotalItemsLen(result) });
-
-                if ((index + 1) >= __PANEL[currentTab].flux.length)
-                    setTimeout(() => res(result), 1000);
             });
+
+            const duration = 300 * __PANEL[currentTab].flux.length;
+            setTimeout(() => res(result), duration);
+            console.log(currentTab, duration + 'ms');
         });
 
         this.setState(
