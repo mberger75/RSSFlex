@@ -135,50 +135,56 @@
 .boardContainerTitle > h2 {
     margin: 5px;
 }
-
 .board, .header-board {
     width: 400px;
 }
-
 .board {
     margin: 0 1% 20px;
     margin-bottom: 20px;
     height: 450px;
     overflow-y: overlay;
     overflow-x: hidden;
-    box-shadow: inset 0px -30px 30px -20px rgb(201, 201, 201);
+    box-shadow: inset 0px -30px 30px -20px rgba(0, 35, 82, 0.3);
 }
-.board > .header-board {
+.header-board {
     position: absolute;
     background-color: var(--main-dark);
     padding: 10px;
     margin: 0px;
     z-index: 999;
 }
-.header-board > .icon {
+.icon {
     float: left;
     margin-right: 10px;
     width: 17px;
     height: 17px;
 }
-.header-board > .boardTitle {
+.boardTitle {
     text-decoration: none;
     font-weight: bold;
     color: #fff;
     font-size: 13px;
     margin: 0;
 }
-.header-board > .boardTitle:hover {
+.boardTitle:hover {
     text-decoration: underline;
 }
 .seemore {
     display: none;
-}
-.header-board > .itemLen {
     float: right;
-    color: #fff;
-    font-size: 13px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 5px;
+}
+.itemLen {
+    float: right;
+    width: 25px;
+    padding: 3px;
+    text-align: center;
+    font-size: 11px;
     font-weight: bold;
+    color: #fff;
+    border: 1px solid #fff;
 }
 .article {
     cursor: pointer;

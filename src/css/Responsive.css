@@ -48,6 +48,12 @@
         margin: 0 auto;
         right: 0;
         top: 0;
+        height: 35px;
+    }
+    .icons span {
+        font-size: 13px;
+        height: 23px;
+        padding: 3px;
     }
     .board {
         height: 30px;
@@ -62,9 +68,7 @@
         margin-bottom: 20px;
     }
     .seemore {
-        cursor: pointer;
-        display: inline;
-        margin-left: 5px;
+        display: block;
     }
 
     .header-board > .boardTitle {

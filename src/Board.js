@@ -91,14 +91,10 @@ class Board extends Component {
                     <a className="boardTitle" href={feed.link} title={feed.link} target="_blank" rel="noopener noreferrer">
                         {this.getCleanTitle(feed.link, feed.title)}
                     </a>
-                    <div className="itemLen">
-                        {feed.items.length}
-                        <div className="seemore">
-                            <span className="plus" onClick={(e) => this.displayBoard(e)} role="img" aria-label="Emoji">
-                                {seemore}
-                            </span>
-                        </div>
+                    <div className="seemore" onClick={(e) => this.displayBoard(e)}>
+                        <span className="plus" role="img" aria-label="Emoji">{seemore}</span>
                     </div>
+                    <div className="itemLen">{feed.items.length}</div>
                 </header>
                 <div className="article-wrapper">
                     {feed.items.map(item => this.generateItem(item))}
