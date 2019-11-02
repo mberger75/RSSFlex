@@ -58,12 +58,14 @@
     margin-left: 10px;
 }
 .button-tab > .btn {
-    border: 1px solid #000;
-    border-bottom: none;
-    outline: none;
     padding: 7px 7px 10px 7px;
     margin-right: 5px;
     background: #fff;
+    color: var(--main-dark);
+    font-weight: bold;
+    outline: none;
+    border: 1px solid var(--main-dark);
+    border-bottom: none;
 }
 .button-tab > .btn:hover {
     cursor: pointer;
@@ -73,7 +75,6 @@
 }
 .button-tab .active {
     padding: 7px 8px 10px 8px;
-    font-weight: bold;
     background-color: var(--main-dark);
     color: #fff;
 }

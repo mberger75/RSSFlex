@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class ScrollTop extends Component {
+class ButtonToTop extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -40,4 +40,4 @@ class ScrollTop extends Component {
     }
 }
 
-export default ScrollTop;
+export default ButtonToTop;

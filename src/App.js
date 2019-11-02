@@ -1,21 +1,20 @@
 // Modules
-import React, {Component} from 'react';
+import React from 'react';
 import Parser from 'rss-parser';
 import __PANEL from './Panel';
 
 // Components
-import Header from './Header';
-import Board from './Board';
-import ScrollTop from './ScrollTop';
-import Loading from './loading';
+import Header from './component/Header';
+import Board from './component/Board';
+import ButtonToTop from './component/ButtonToTop';
+import Loading from './component/loading';
 
 // Stylesheet / img
 import './App.css';
-import './css/Responsive.css';
-import './css/PanelScrollbar.css';
+import './component/Responsive.css';
 import rssIcon from './img/rssIcon.png';
 
-class App extends Component {
+class App extends React.Component {
 
     constructor(props) {
         super(props);
@@ -48,13 +47,13 @@ class App extends Component {
         });
     }
 
-    fetchData() {
+    async fetchData() {
         this.setState({ isLoaded: false });
         const { currentTab } = this.state;
         const parser = new Parser({ maxRedirects: 500 });
         const limit = arr => len => arr.length >= len ? arr.slice(0, len) : arr;
 
-        new Promise(res => {
+        const result = await new Promise(res => {
             const result = [];
 
             __PANEL[currentTab].flux.forEach(async (url, index) => {
@@ -68,15 +67,16 @@ class App extends Component {
                 });
 
                 this.setState({ totalItemsLen: this.getTotalItemsLen(result) });
-                if ((index + 1) >= __PANEL[currentTab].flux.length) res(result);
+
+                if ((index + 1) >= __PANEL[currentTab].flux.length)
+                    setTimeout(() => res(result), 1000);
             });
-        })
-        .then(result => {
-            setTimeout(() => {
-                this.setState({ datas: result, isLoaded: true },
-                sessionStorage.setItem(currentTab, JSON.stringify(result)));
-            }, 2000);
         });
+
+        this.setState(
+            { datas: result, isLoaded: true },
+            sessionStorage.setItem(currentTab, JSON.stringify(result))
+        );
     }
 
     findData() {
@@ -112,13 +112,7 @@ class App extends Component {
     }
 
     render() {
-        const {
-            isLoaded,
-            datas,
-            totalItemsLen,
-            currentTab,
-            tabState,
-        } = this.state;
+        const { isLoaded, datas, totalItemsLen, currentTab, tabState } = this.state;
 
         return (
             <div className="App">
@@ -132,7 +126,7 @@ class App extends Component {
                     {!isLoaded ? <Loading />
                     : datas.map((el, id) => <Board key={id} id={id} feed={el}/>)}
                 </div>
-                <ScrollTop boardContainerRef={this.boardContainerRef}/>
+                <ButtonToTop boardContainerRef={this.boardContainerRef}/>
             </div>
         )
     }

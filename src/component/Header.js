@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import {Time} from './Utils';
+import React from 'react';
+import {Time} from '../Utils';
 
-import './css/Header.css';
-import logo from './img/logo.png';
+import './Header.css';
+import logo from '../img/logo.png';
 
-class Header extends Component {
+class Header extends React.Component {
     constructor() {
         super();
         this.state = {

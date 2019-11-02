@@ -4,7 +4,7 @@
         margin-bottom: 20px;
     }
     .button-tab > .btn {
-        border: 1px solid #000;
+        border: 1px solid var(--main-dark);
         display: inline-block;
         width: 70px;
         padding: 7px;

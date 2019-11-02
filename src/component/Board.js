@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {Time} from './Utils';
+import React from 'react';
+import {Time} from '../Utils';
 
-import './css/Board.css';
+import './Board.css';
 
-class Board extends Component {
+class Board extends React.Component {
 
     constructor() {
         super();
@@ -65,6 +65,7 @@ const generateItem = item => {
     const shorten = str => str.substring(0, 140);
     const utf8 = str => str
         .replace(/&#8217;|&#39;/g, `'`)
+        .replace(/&#8230;/g, '...')
         .replace(/&eacute;|&egrave;|&ecirc;|&euml;/g, 'e')
         .replace(/&agrave;|&acirc;/g, 'a')
         .replace(/&ccedil;/g, 'ç')

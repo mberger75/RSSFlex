@@ -6,7 +6,7 @@
     width: 100%;
     min-height: 100%;
     padding: 30px 20px 0px 20px;
-    border-top: 1px solid #000;
+    border-top: 1px solid var(--main-dark);
 }
 .boardContainerTitle {
     width: 100%;
@@ -130,3 +130,35 @@
 .spacer {
     height: 55px;
 }
+
+/* CUSTOM SCROLLBAR */
+.board::-webkit-scrollbar {
+    width: 9px;
+}
+  ::-webkit-scrollbar-button {
+    width: 0px;
+  }
+  ::-webkit-scrollbar-button:vertical:decrement {
+    height: 45px;
+  }
+  ::-webkit-scrollbar-button:vertical:increment {
+    height: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.5);
+    border: 0px none transparent;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #666666;
+  }
+  ::-webkit-scrollbar-thumb:active {
+    background: #666666;
+  }
+  ::-webkit-scrollbar-corner {
+    background: #666666;
+  }
+  ::-webkit-scrollbar-track { 
+    border-radius: 30px;
+    background: transparent;
+  }
