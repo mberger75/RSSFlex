@@ -67,8 +67,8 @@ const generateItem = item => {
         .replace(/&#8217;|&#39;/g, `'`)
         .replace(/&eacute;|&egrave;|&ecirc;|&euml;/g, 'e')
         .replace(/&agrave;|&acirc;/g, 'a')
-        .replace(/&ccedil;/, 'ç')
-        .replace(/&#32;/, '');
+        .replace(/&ccedil;/g, 'ç')
+        .replace(/&#32;/g, '');
 
     const cleanXML = xml => xml.replace(/<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/g, '')
 
