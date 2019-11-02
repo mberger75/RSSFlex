@@ -2,19 +2,21 @@
 import React, {Component} from 'react';
 import Parser from 'rss-parser';
 import __PANEL from './Panel';
-import Utils from './Utils';
 
 // Components
 import Header from './Header';
 import Board from './Board';
 import ScrollTop from './ScrollTop';
+import Loading from './loading';
 
-// Stylesheet
+// Stylesheet / img
 import './App.css';
 import './css/Responsive.css';
 import './css/PanelScrollbar.css';
+import rssIcon from './img/rssIcon.png';
 
 class App extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -31,119 +33,132 @@ class App extends Component {
         let dataLen = 0;
 
         if (datas) {
-            datas.map(el => el ? dataLen += el.items.length : dataLen);
+            datas.forEach(el => el ? dataLen += el.items.length : dataLen);
         }
         return dataLen;
     }
 
-    checkSessionStorage() {
-        if (sessionStorage.getItem(this.state.currentTab)) {
-            let sessionDatas = JSON.parse(sessionStorage.getItem(this.state.currentTab));
-            this.setState({
-                datas: sessionDatas,
-                isLoaded: true,
-                totalItemsLen: this.getTotalItemsLen(sessionDatas)
-            });
-            return true;
-        }
-        return false;
+    fetchFromStorage() {
+        let sessionDatas = JSON.parse(sessionStorage.getItem(this.state.currentTab));
+
+        this.setState({
+            datas: sessionDatas,
+            isLoaded: true,
+            totalItemsLen: this.getTotalItemsLen(sessionDatas)
+        });
     }
 
     fetchData() {
-        let datasParsed = [];
-        let parser = new Parser();
-        let flux = __PANEL[this.state.currentTab].flux;
-        let articleByFeed = 5;
+        const { currentTab } = this.state;
+        const parser = new Parser();
+        const result = [];
+        const articleByFeed = 9;
 
-        if(!this.checkSessionStorage()) {
-            Promise.all(flux.map(url => {
-                return parser.parseURL(Utils.cors(url), (err, feed) => {
-                    if (err) return;
-                    
-                    let result = {
-                        description: feed.description,
-                        image: feed.image ? feed.image.url : 'https://cdn2.iconfinder.com/data/icons/social-icon-3/512/social_style_3_rss-512.png',
-                        items: feed.items.slice(0, articleByFeed),
-                        link: feed.link,
-                        title: feed.title,
-                    };
+        __PANEL[currentTab].flux.forEach(url => {
+            parser.parseURL(`https://cors-anywhere.herokuapp.com/${url}`, (err, feed) => {
+                if (err) return console.log(err);
 
-                    datasParsed.push(result);
-
-                    return this.setState({
-                        datas: datasParsed,
-                        isLoaded: true,
-                        totalItemsLen: this.getTotalItemsLen(datasParsed)
-                    },
-                        sessionStorage.setItem(
-                            this.state.currentTab, 
-                            JSON.stringify(datasParsed)
-                        )
-                    );
+                result.push({
+                    description: feed.description,
+                    image: feed.image ? feed.image.url : rssIcon,
+                    items: feed.items.slice(0, articleByFeed),
+                    link: feed.link,
+                    title: feed.title,
                 });
-            }));
-        }
+
+                this.setState({
+                    isLoaded: false,
+                    totalItemsLen: this.getTotalItemsLen(result)
+                });
+            });
+
+            setTimeout(() => {
+                this.setState({ datas: result, isLoaded: true },
+                sessionStorage.setItem(currentTab, JSON.stringify(result)));
+            }, 2000);
+        });
+    }
+
+    findData() {
+        if(sessionStorage.getItem(this.state.currentTab) !== null)
+            return this.fetchFromStorage();
+        this.fetchData();
     }
 
     toggleClick = (id, title) => {
-        let sliced = this.state.tabState.slice();
+        const { tabState } = this.state;
+        const sliced = tabState.slice();
 
         for (let i = 0; i < sliced.length; i++) {
             i === id ? sliced[i] = 'active' : sliced[i] = '';
         }
 
-        if (!this.state.isLoaded) return;
-            
-        return this.setState({
-                tabState: sliced,
-                currentTab: title,
-                totalItemsLen: 0,
-                isScrolled: false
-            }, this.fetchData);
+        this.setState({
+            tabState: sliced,
+            currentTab: title,
+            totalItemsLen: 0,
+            isScrolled: false,
+            isLoaded: false
+        }, this.findData);
     }
 
     clearSession = () => {
         sessionStorage.clear();
-        this.fetchData();
+        window.location.reload();
     }
 
     componentDidMount() {
-        this.fetchData();
+        this.findData();
     }
 
     render() {
         const {
-            isLoaded, 
-            datas, 
-            totalItemsLen, 
-            currentTab, 
-            tabState, 
+            isLoaded,
+            datas,
+            totalItemsLen,
+            currentTab,
+            tabState,
         } = this.state;
-    
+
         return (
             <div className="App">
                 <Header clearSession={this.clearSession}/>
-
-                <div className="button-tab">
-                {Object.keys(__PANEL).map((key, id) => (
-                    <button key={id} className={`btn ${tabState[id]}`} title={key} onClick={() => this.toggleClick(id, key)}>
-                        <span className="tab-emoji" role="img" aria-label="Emoji">{__PANEL[key].emoji}</span>
-                        <span className="tab-name">{key}</span>
-                    </button>
-                ))}
-                </div>
+                <ResponsiveNav tabState={tabState} isLoaded={isLoaded} toggleClick={this.toggleClick}/>
                 <div className={`board-container ${currentTab}`} ref={this.boardContainerRef}>
                     <div className="boardContainerTitle">
                         <h2>{currentTab}</h2>
                         <span>{`${totalItemsLen} articles`}</span>
                     </div>
-                    {!isLoaded ? <h1 className="loading">{`Loading ${currentTab} RSS feeds...`}</h1>
+                    {!isLoaded ? <Loading />
                     : datas.map((el, id) => <Board key={id} id={id} feed={el}/>)}
                 </div>
                 <ScrollTop boardContainerRef={this.boardContainerRef}/>
             </div>
         )
     }
+}
+
+const ResponsiveNav = ({ tabState, isLoaded, toggleClick }) => {
+
+    const fadeOut = { opacity: .5, cursor: 'not-allowed' };
+    const fadeIn = { opacity: 1, transition: '.3s' };
+
+    return (
+        <div className="button-tab">
+            {Object.keys(__PANEL).map((key, id) => (
+                <button 
+                    key={id}
+                    className={`btn ${tabState[id]}`}
+                    title={key}
+                    onClick={() => isLoaded && toggleClick(id, key)}
+                    style={!isLoaded ? fadeOut : fadeIn}
+                >
+                    <span className="tab-emoji" role="img" aria-label="Emoji">{__PANEL[key].emoji}</span>
+                    <span className="tab-name">{key}</span>
+                </button>
+            ))}
+        </div>
+    );
 }
 
 export default App;

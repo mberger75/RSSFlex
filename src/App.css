@@ -4,7 +4,7 @@
 
 .App > .header-app {
     height: 50px;
-    background-color: #353536;
+    background-color: var(--main-dark);
     color: #fff;
     padding: 10px;
     margin: 0px 0px 30px 0px;
@@ -42,7 +42,7 @@
     width: 30px;
     height: 30px;
     text-align: center;
-    background-color: rgb(255, 255, 255);
+    background: rgb(255, 255, 255);
     opacity: .3;
     bottom: 5px;
     right: 5px;
@@ -66,10 +66,9 @@
     text-align: center;
 }
 .icons {
-    background-color: #353536;
+    position: absolute;
     width: 135px;
     height: 40px;
-    position: absolute;
     float: right;
     top: 10px;
     right: 5px;
@@ -77,31 +76,29 @@
     justify-content: center;
     border-bottom-right-radius: 9px;
     border-bottom-left-radius: 9px;
+    background-color: var(--main-dark);
 }
-.icons .Website {
-    background: url(./img/spritesheet.png) -30px 0px;
-}
-.icons .Github {
-    background: url(./img/spritesheet.png) -60px 0px;
-}
-.icons .Twitter {
-    background: url(./img/spritesheet.png) -90px 0px;
-}
-.icons .refresh {
+.icons span {
     cursor: pointer;
-    background: url(./img/spritesheet.png) -120px 0px;
+    width: 70%;
+    padding: 5px;
+    text-align: center;
+    font-size: 15px;
+    border: 1px dotted #fff;
+    border-radius: 5px;
 }
 
 .button-tab {
-    background-color: transparent;
+    background: transparent;
     margin-left: 10px;
 }
 .button-tab > .btn {
-    border: none;
+    border: 1px solid #000;
+    border-bottom: none;
     outline: none;
     padding: 7px 7px 10px 7px;
     margin-right: 5px;
-    background-color: #fff;
+    background: #fff;
 }
 .button-tab > .btn:hover {
     cursor: pointer;
@@ -112,7 +109,8 @@
 .button-tab .active {
     padding: 7px 8px 10px 8px;
     font-weight: bold;
-    background-color: #C9C9C9;
+    background-color: var(--main-dark);
+    color: #fff;
 }
 
 .board-container {
@@ -123,11 +121,11 @@
     width: 100%;
     min-height: 100%;
     padding: 30px 20px 0px 20px;
-    background-color: #C9C9C9;
+    border-top: 1px solid #000;
 }
 .boardContainerTitle {
     width: 100%;
-    color: #fff;
+    color: var(--main-dark);
     font-size: 25px;
     font-weight: bold;
     text-align: center;
@@ -138,14 +136,7 @@
     margin: 5px;
 }
 
-.loading {
-    font-size: 23px;
-    color: #fff;
-    text-align: center;
-}
-
-.board, 
-.header-board {
+.board, .header-board {
     width: 400px;
 }
 
@@ -155,12 +146,11 @@
     height: 450px;
     overflow-y: overlay;
     overflow-x: hidden;
-    background-color: #fff;
     box-shadow: inset 0px -30px 30px -20px rgb(201, 201, 201);
 }
 .board > .header-board {
     position: absolute;
-    background-color: rgb(158, 157, 157);
+    background-color: var(--main-dark);
     padding: 10px;
     margin: 0px;
     z-index: 999;
@@ -179,17 +169,16 @@
     margin: 0;
 }
 .header-board > .boardTitle:hover {
-    text-shadow: 0px 0px 3px rgb(231, 86, 231);
+    text-decoration: underline;
 }
 .seemore {
     display: none;
 }
 .header-board > .itemLen {
     float: right;
-    width: 25px;
-    height: 25px;
-    margin-left: 10px;
-    padding: 5px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: bold;
 }
 .article {
     cursor: pointer;
@@ -204,7 +193,7 @@
 }
 
 .content:hover {
-    background-color: rgba(128, 128, 128, 0.2);
+    background-color: rgba(198, 216, 218, 0.2);
 }
 .content-main {
     color: #000;
@@ -228,7 +217,7 @@
 .title {
     font-size: 15px;
     font-weight: bold;
-    color: rgb(18, 202, 18);
+    color: var(--main-dark);
 }
 .categorie {
     font-style: italic;
@@ -236,7 +225,7 @@
 }
 .date {
     font-size: 13px;
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.7);
 }
 .thumbnail {
     float: left;
@@ -246,17 +235,7 @@
 }
 .description {
     font-size: 15px;
-    color: #000;
 }
 .spacer {
     height: 55px;
-}
-.itemLen {
-    text-align: center;
-    display: inline-block;
-    background-color: rgba(46, 46, 46, 0.3);
-    color: #fff;
-    font-size: 13px;
-    font-weight: bold;
-    border-radius: 3px;
 }

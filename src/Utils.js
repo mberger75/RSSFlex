@@ -27,6 +27,6 @@ export class Time {
 
         return new Date()
             .toLocaleDateString('fr-FR', options)
-            .replace('à', '\n');
+            .replace('à', '-');
     }
 }

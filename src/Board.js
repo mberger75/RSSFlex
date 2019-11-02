@@ -81,8 +81,8 @@ class Board extends Component {
     }
 
     render() {
-        const {feed} = this.props;
-        const {boardClass, seemore} = this.state;
+        const { feed } = this.props;
+        const { boardClass, seemore } = this.state;
 
         return (
             <div className={`board ${boardClass}`}>

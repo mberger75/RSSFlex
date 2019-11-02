@@ -18,17 +18,17 @@ class Header extends Component {
         }, 500);
     }
 
-    icon(conf) {    
-        return (
-            <a 
-                href={conf.href}
-                title={conf.title}
-                target="_blank" rel="noopener noreferrer"
-            >
-                <span className={"sprite " + conf.title}></span>
-            </a>
-        )
-    }
+    // icon(conf) {    
+    //     return (
+    //         <a 
+    //             href={conf.href}
+    //             title={conf.title}
+    //             target="_blank" rel="noopener noreferrer"
+    //         >
+    //             <span className={"sprite " + conf.title}></span>
+    //         </a>
+    //     )
+    // }
 
     updateWindowDimensions() {
         this.setState({
@@ -48,8 +48,8 @@ class Header extends Component {
     }
 
     render() {
-        const {clearSession} = this.props;
-        const {time} = this.state;
+        const { clearSession } = this.props;
+        const { time } = this.state;
 
         return (
             <header className="header-app">
@@ -61,15 +61,7 @@ class Header extends Component {
                 </div>
                 <div className="current-time">{time}</div>
                 <div className="icons">
-                    {this.icon({title: 'Website', href: 'https://bergermarc.com'})}
-                    {this.icon({title: 'Twitter', href: 'https://twitter.com/marcbrgr'})}
-                    {this.icon({title: 'Github', href: 'https://github.com/mberger75'})}
-                    <span 
-                        className="sprite refresh" 
-                        title="Clear session" 
-                        onClick={clearSession}
-                    >
-                    </span>
+                    <span className="sprite refresh" title="Clear session" onClick={clearSession}>REFRESH</span>
                 </div>
             </header>
         )

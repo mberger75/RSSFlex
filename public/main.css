@@ -1,15 +1,23 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+
+:root {
+    --main-dark: rgb(86, 103, 255);
+    --main-light: #fff;
+}
+
 * {
-  box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
 html, body, #root, #root > div {
-  min-height: 100%!important;
+    min-height: 100%!important;
 }
 
 body {
-  background-color: #000;
-  margin: 0;
-  padding: 0;
+    background: #fff;
+    color: #000;
+    margin: 0;
+    padding: 0;
+    user-select: none;
 }

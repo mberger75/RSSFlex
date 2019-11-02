@@ -11,6 +11,7 @@
         margin-bottom: 20px;
     }
     .button-tab > .btn {
+        border: 1px solid #000;
         display: inline-block;
         width: 70px;
         padding: 7px;
@@ -30,9 +31,7 @@
         height: 100px!important;
         margin-bottom: 50px!important;
     }
-    .current-time, 
-    .prez, 
-    .icons {
+    .current-time, .prez, .icons {
         position: relative;
         float: none;
     }
@@ -65,14 +64,11 @@
     .seemore {
         cursor: pointer;
         display: inline;
-        margin-left: 15px;
+        margin-left: 5px;
     }
 
     .header-board > .boardTitle {
         font-size: 11px;
-    }
-    .header-board > .itemLen {
-       margin-right: 25px;
     }
     .title {
         font-size: 13px;
