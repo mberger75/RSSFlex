@@ -1,5 +1,5 @@
 import React from 'react';
-import {Time} from '../Utils';
+import { Time } from '../Utils';
 
 import './Header.css';
 import logo from '../img/logo.png';
@@ -23,7 +23,7 @@ class Header extends React.Component {
 
     updateWindowDimensions() {
         this.setState({
-            viewWidth: window.innerWidth, 
+            viewWidth: window.innerWidth,
             viewHeight: window.innerHeight
         });
     }
@@ -38,8 +38,12 @@ class Header extends React.Component {
         window.removeEventListener('resize', this.updateWindowDimensions);
     }
 
+    clearSession = () => {
+        sessionStorage.clear();
+        window.location.reload();
+    }
+
     render() {
-        const { clearSession } = this.props;
         const { time } = this.state;
 
         return (
@@ -52,7 +56,7 @@ class Header extends React.Component {
                 </div>
                 <div className="current-time">{time}</div>
                 <div className="nav">
-                    <span className="refresh" onClick={clearSession} role="img" aria-label="Emoji Refresh">🔄</span>
+                    <span className="refresh" onClick={this.clearSession} role="img" aria-label="Emoji Refresh">🔄</span>
                 </div>
             </header>
         )

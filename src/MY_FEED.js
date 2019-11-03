@@ -1,6 +1,5 @@
-const __PANEL = {
+const MY_FEED = {
     'DEV': {
-        'state': 'active',
         'emoji': '💻',
         'flux': [
             'https://www.codeur.com/blog/feed/',
@@ -9,11 +8,10 @@ const __PANEL = {
             'https://news.humancoders.com/items/feed.rss',
             'https://korben.info/category/infos/developpement/?feed=rss',
             'https://www.lafermeduweb.net/search-rss.xml?search_veille%5Bsorting%5D=publishedAt-desc&search_veille%5BnbPerPages%5D=10&search_veille%5BdateInterval%5D=&search_veille%5Bauthor%5D=&search_veille%5Blang%5D=all&search_veille%5Bsearch%5D=javascript',
-            'thecrazyprogrammer.com/feed',
-            'sitepoint.com/feed',
+            'https://www.thecrazyprogrammer.com/feed',
+            'https://www.sitepoint.com/feed/',
             'https://www.reddit.com/r/javascript/.rss?format=xml',
-            'http://www.echojs.com/rss',
-
+            'https://www.echojs.com/rss',
         ]
     },
     'UI/UX': {
@@ -46,4 +44,4 @@ const __PANEL = {
     },
 };
 
-export default __PANEL;
+export default MY_FEED;

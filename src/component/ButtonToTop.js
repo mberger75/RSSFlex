@@ -15,9 +15,8 @@ class ButtonToTop extends React.Component {
 
     handleScroll = () => {
         window.onscroll = () => {
-            if (window.pageYOffset >= this.props.boardContainerRef.current.offsetTop) {
+            if (window.pageYOffset >= this.props.boardRef.current.offsetTop)
                 return this.setState({isScrolled: true});
-            }
             return this.setState({isScrolled: false});
         };
     }
