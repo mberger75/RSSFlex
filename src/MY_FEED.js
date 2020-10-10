@@ -30,7 +30,6 @@ const MY_FEED = {
             'https://developer.apple.com/news/rss/news.rss',
             'https://www.androidcentral.com/feed',
             'https://phoneradar.com/feed/',
-            'https://www.pcmag.com/Rss.aspx/SectionArticles?sectionId=27943'
         ]
     },
     'HARDWARE': {
@@ -38,8 +37,6 @@ const MY_FEED = {
         'flux': [
             'https://www.dealabs.com/rssx/keyword-alarm/UPAjL9ODne8YxbeWT_PUINfEbDxBAjO_aANHI4Ytghg.',
             'https://www.tomshardware.com/feeds/all',
-            'https://www.pcmag.com/Rss.aspx/SectionArticles?sectionId=1565',
-            'https://www.pcmag.com/Rss.aspx/SectionArticles?sectionId=1564'
         ]
     },
 };

@@ -58,7 +58,7 @@ class App extends React.Component {
             const result = [];
 
             MY_FEED[curTab].flux.forEach(async url => {
-                const feed = await parser.parseURL(`${CORS}/${url}`).catch(err => console.error(err));
+                const feed = await parser.parseURL(`${CORS}/${url}`).catch(err => console.log('rss-parser:', err));
                 if (feed === undefined) return console.log('Error: Cannot fetch', url);
 
                 const { description, image, items, link, title } = feed;
@@ -121,7 +121,8 @@ const BoardContainer = ({ state, boardRef }) => {
         <div className={`board-container ${curTab}`} ref={boardRef}>
             <div className="boardContainerTitle">
                 <h2>{curTab}</h2>
-                <span>{`${tabLen} articles`}</span>
+                <h3>{MY_FEED[curTab].flux.length} feeds</h3>
+                <span>{tabLen} articles</span>
             </div>
             {!isLoaded ? <Loading />
                 : datas.map((el, id) => <Board key={id} id={id} feed={el} />)}
