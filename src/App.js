@@ -58,7 +58,7 @@ class App extends React.Component {
             const result = [];
 
             MY_FEED[curTab].flux.forEach(async url => {
-                const feed = await parser.parseURL(`${CORS}/${url}`).catch(err => console.log(err));
+                const feed = await parser.parseURL(`${CORS}/${url}`).catch(err => console.error(err));
                 if (feed === undefined) return console.log('Error: Cannot fetch', url);
 
                 const { description, image, items, link, title } = feed;
@@ -73,8 +73,8 @@ class App extends React.Component {
             });
 
             const duration = 300 * MY_FEED[curTab].flux.length;
-            setTimeout(() => res(result), duration);
-            console.log(curTab, duration + 'ms');
+            setTimeout(async () => await res(result), duration);
+            console.log(`Loaded ${curTab} in ${duration}ms`);
         });
 
         this.setState(
